@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{config('app.locale')}}">
+<html class="bg-[#F6F7F9]" lang="{{config('app.locale')}}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
