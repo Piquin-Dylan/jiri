@@ -2,4 +2,4 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'login')->name('home');
+Route::livewire('/', 'login')->name('login');
