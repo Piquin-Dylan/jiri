@@ -9,8 +9,9 @@ new class extends Component {
 
 <div>
     <div class="flex justify-center items-center min-h-screen">
-        <form class="bg-white rounded-2xl w-full p-4 lg:p-8 m-4 lg:max-w-2xl" action="#" method="post">
-            <x-livewire.form.title_subtitle title="Connexion" subtitle="Accédez à votre espace pour gérer vos jiri et vos contacts"></x-livewire.form.title_subtitle>
+        <form class="form" action="#" method="post">
+            <x-form.title_subtitle title="Connexion"
+                                   subtitle="Accédez à votre espace pour gérer vos jiri et vos contacts"></x-form.title_subtitle>
             <x-form.input label="Email" name="email" type="email" placeHolder="John@gmail.com"></x-form.input>
             <x-form.input label="Mot de passe" name="password" type="password"
                           placeHolder="Saisissez votre mot de passe"></x-form.input>
