@@ -1,5 +1,5 @@
 <aside
-    class="fixed top-0 left-0 h-full w-64 bg-white z-40">
+        class="fixed top-0 left-0 h-full w-64 bg-white z-40">
     <h2 class="sr-only">
         Navigation principale
     </h2>
