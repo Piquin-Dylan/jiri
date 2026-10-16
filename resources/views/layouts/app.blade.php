@@ -13,11 +13,11 @@
 ])
 </head>
 <body>
-@unless (request()->routeIs('login', 'register','password.request'))
+@unless (request()->routeIs('login', 'register','password.request','password.reset'))
     <x-navigation.sidebar/>
 @endunless
 
-<main @class(['min-h-screen', 'pl-68 pt-4' => ! request()->routeIs('login', 'register','password.request')])>
+<main @class(['min-h-screen', 'pl-68 pt-4' => ! request()->routeIs('login', 'register','password.request','password.reset')])>
     {{ $slot }}
 </main>
 </body>

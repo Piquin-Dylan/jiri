@@ -12,6 +12,7 @@
             <x-navigation.nav name="Jiri" link="login"></x-navigation.nav>
             <x-navigation.nav name="Contacts" link="contact"></x-navigation.nav>
             <x-navigation.nav name="Projet" link="project"></x-navigation.nav>
+            <x-form.logout></x-form.logout>
         </ul>
     </nav>
 </aside>
