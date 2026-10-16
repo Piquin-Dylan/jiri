@@ -1,15 +1,7 @@
-<?php
-
-use Livewire\Component;
-
-new class extends Component {
-    //
-};
-?>
-
-<div>
+<x-layout.app>
     <div class="flex justify-center items-center min-h-screen">
-        <form class="form" action="#" method="post">
+        <form class="form" action="{{route('login')}}" method="post">
+            @csrf
             <x-form.title_subtitle title="Connexion"
                                    subtitle="Accédez à votre espace pour gérer vos jiri et vos contacts"></x-form.title_subtitle>
             <x-form.input label="Email" name="email" type="email" placeHolder="John@gmail.com"></x-form.input>
@@ -25,4 +17,4 @@ new class extends Component {
             </div>
         </form>
     </div>
-</div>
+</x-layout.app>

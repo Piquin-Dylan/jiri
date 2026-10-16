@@ -11,6 +11,6 @@
            placeholder="{{$placeHolder}}">
 
     @error($name)
-    <p class="text-white">{{$message}}</p>
+    <p class="text-red-600">{{$message}}</p>
     @enderror
 </div>
