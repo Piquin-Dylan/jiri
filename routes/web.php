@@ -6,3 +6,4 @@ Route::livewire('/', 'livewire.form.login')->name('login');
 Route::livewire('/register', 'livewire.form.register')->name('register');
 Route::livewire('/dashboard', 'dashboard')->name('dashboard');
 Route::livewire('/project', 'livewire.pages.project')->name('project');
+Route::livewire('/contact', 'livewire.pages.contact')->name('contact');
