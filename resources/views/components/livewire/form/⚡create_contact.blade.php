@@ -17,7 +17,7 @@ new class extends Component {
 
 
         <div class="grid">
-            <x-button name="Créer le Jiri"></x-button>
+            <x-button name="Créer le Contact"></x-button>
         </div>
     </form>
 </div>
