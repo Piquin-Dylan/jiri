@@ -9,7 +9,7 @@
                           placeHolder="Saisissez votre mot de passe"></x-form.input>
 
             <div class=" flex justify-end">
-                <a href="#" class="mt-2">Mot de passe oublié ?</a>
+                <a href="{{route('password.request')}}" class="mt-2">Mot de passe oublié ?</a>
             </div>
             <div class="grid">
                 <x-button name="Se connecter"></x-button>
