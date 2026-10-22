@@ -9,6 +9,7 @@ new class extends Component {
 
 <div>
     <form class="form" action="#" method="post">
+        {{$slot}}
         <x-form.title_subtitle title="Création d'un Jiri"
                                subtitle="Créer votre premier Jiri pour gérer votre jury"></x-form.title_subtitle>
         <x-form.input label="Nom du projet" name="project" type="text" placeHolder="Jury de pw 25/26"></x-form.input>
@@ -19,7 +20,7 @@ new class extends Component {
 
 
         <div class="grid">
-        <x-button name="Créer le Jiri"></x-button>
+            <x-button name="Créer le Jiri"></x-button>
         </div>
     </form>
 </div>

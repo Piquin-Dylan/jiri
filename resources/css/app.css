@@ -8,6 +8,14 @@
 }
 @layer components {
     .form {
-        @apply bg-white rounded-2xl w-full p-4 lg:p-8 m-4 lg:max-w-2xl
+        @apply bg-white rounded-2xl w-full p-4 lg:p-8  lg:max-w-2xl
+    }
+
+    .modal {
+        @apply relative w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-[8px] bg-white  shadow-xl
+    }
+
+    .close-modal{
+        @apply absolute top-3 right-3 text-2xl leading-none cursor-pointer
     }
 }

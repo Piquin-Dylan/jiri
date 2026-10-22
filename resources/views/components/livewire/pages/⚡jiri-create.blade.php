@@ -55,21 +55,23 @@ new class extends Component {
 
         <div class="flex row justify-between mb-6">
             <div>
-                <x-contact-card name="John Dupont" email="john.dupont@gmail.com"></x-contact-card>
+                <div class="flex justify-between p-4">
+
+                    <div class="flex gap-3 mb-6">
+                        <span class="m-auto">JD</span>
+
+
+                        <div class="grid gap-1">
+                            <span>Jean</span>
+                            <span>Dupont</span>
+                        </div>
+                    </div>
+                </div>
             </div>
             <input type="checkbox">
         </div>
-        <div class="flex row justify-between">
-            <div>
-                <span class="text-[16px] font-bold">Site client</span>
-                <p class="text-[14px] mt-2">test test</p>
-            </div>
-            <input type="checkbox">
-        </div>
-
-
         <div class="grid">
-            <x-button name="Ajouter le projet"></x-button>
+            <x-button name="Ajouter le contact"></x-button>
         </div>
     </form>
 
