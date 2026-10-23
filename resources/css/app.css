@@ -15,7 +15,12 @@
         @apply relative w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-[8px] bg-white  shadow-xl
     }
 
-    .close-modal{
+    .close-modal {
         @apply absolute top-3 right-3 text-2xl leading-none cursor-pointer
+    }
+
+
+    .modal-bg {
+        @apply fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4
     }
 }

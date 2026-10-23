@@ -1,6 +1,6 @@
 @props([
-    'title',
-    'information',
+    'title'=>'',
+    'information'=>"",
     'action',
     'openEvent'=>'open-modal'
 ])
