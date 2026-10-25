@@ -12,7 +12,7 @@ return new class extends Migration {
             $table->string('name_project');
             $table->string('description');
             $table->string('link');
-            $table->string('task');
+            $table->string('task')->nullable();
             $table->timestamps();
         });
     }
