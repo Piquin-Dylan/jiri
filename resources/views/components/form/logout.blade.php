@@ -1,4 +1,4 @@
-<form action="{{route('logout')}}" method="post">
+<form class="flex justify-center" action="{{route('logout')}}" method="post">
     @csrf
     <x-button type="submit" name="Déconnexion"></x-button>
 </form>
