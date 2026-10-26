@@ -37,12 +37,12 @@ new class extends Component {
             </x-modal>
         @endif
         @foreach($this->jiris as $jiri)
-            <x-project-card title="{{$jiri->name_project}}"
-                            content="{{$jiri->description}} "
-                            date="{{$jiri->date_jiri}}"
-                            hours_start="{{$jiri->hours_start}}"
-                            hours_end="{{$jiri->hours_end}}"
-            ></x-project-card>
+            <x-jiri-card title="{{$jiri->name_project}}"
+                         content="{{$jiri->description}} "
+                         date="{{$jiri->date_jiri}}"
+                         hours_start="{{$jiri->hours_start}}"
+                         hours_end="{{$jiri->hours_end}}"
+                         link="{{route('jiri-create')}}"></x-jiri-card>
         @endforeach
     </div>
 </div>

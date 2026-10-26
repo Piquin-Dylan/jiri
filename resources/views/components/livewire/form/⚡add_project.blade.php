@@ -3,7 +3,11 @@
 use Livewire\Component;
 
 new class extends Component {
-    //
+    #[\Livewire\Attributes\Computed]
+    public function projects()
+    {
+        return \App\Models\Project::orderBy('name')->get();
+    }
 };
 ?>
 
@@ -18,20 +22,15 @@ new class extends Component {
         </div>
         <x-search-bar class="mt-6 mb-6" placeHolder="Rechercher un projet"></x-search-bar>
 
-        <div class="flex row justify-between mb-6">
-            <div>
-                <span class="text-[16px] font-bold">Site client</span>
-                <p class="text-[14px] mt-2">test test</p>
+        @foreach($this->projects as $project)
+            <div class="flex row justify-between mb-6">
+                <div>
+                    <span class="text-[16px] font-bold">{{$project->name_project}}</span>
+                    <p class="text-[14px] mt-2">{{$project->description}}</p>
+                </div>
+                <input type="checkbox">
             </div>
-            <input type="checkbox">
-        </div>
-        <div class="flex row justify-between">
-            <div>
-                <span class="text-[16px] font-bold">Site client</span>
-                <p class="text-[14px] mt-2">test test</p>
-            </div>
-            <input type="checkbox">
-        </div>
+        @endforeach
 
 
         <div class="grid">
