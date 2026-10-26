@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Contact;
+use App\Models\Jiri;
 use App\Models\Project;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -20,5 +21,6 @@ class DatabaseSeeder extends Seeder
 
         Contact::factory(10)->create();
         Project::factory(3)->create();
+        Jiri::factory(3)->create();
     }
 }

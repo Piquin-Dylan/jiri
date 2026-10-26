@@ -13,8 +13,11 @@ class JiriFactory extends Factory
     public function definition(): array
     {
         return [
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
+            'name_project' => fake()->sentence(1),
+            'description'  => fake()->paragraph(),
+            'date_jiri'    => fake()->dateTimeBetween('now', '+1 year')->format('Y-m-d'),
+            'hours_start'  => '09:00',
+            'hours_end'    => '12:00',
         ];
     }
 }

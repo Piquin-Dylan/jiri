@@ -3,23 +3,46 @@
 use Livewire\Component;
 
 new class extends Component {
-    //
+    #[\Livewire\Attributes\Computed]
+    public function jiris()
+    {
+        return \App\Models\Jiri::orderBy('name')->get();
+    }
 };
 ?>
 
 <div>
-    <h2 class="text-xl font-bold mb-4">Liste des Jiris</h2>
+
+    <div class="flex justify-between py-6 pr-4">
+        <h2 class="text-xl font-bold flex items-center">Liste des jiris</h2>
+        <x-modal name="jiris">
+            <x-slot:empty_content>
+                <x-empty-state
+                    action="Créer un Jiri" open-event="open-jiris"></x-empty-state>
+            </x-slot:empty_content>
+            <livewire:livewire.form.create_jiri></livewire:livewire.form.create_jiri>
+        </x-modal>
+    </div>
+
 
     <x-search-bar placeHolder="Rechercher un jiri"></x-search-bar>
     <div class="md:flex md:justify-between">
-        <x-project-card title="Jiri de Pw"
-                        content="Projet qui consiste à faire un site pour un vrai client dans condition réel avec un cahiers des charges "></x-project-card>
-        <x-project-card title="Jiri de Pw"
-                        content="Projet qui consiste à faire un site pour un vrai client dans condition réel avec un cahiers des charges "></x-project-card>
-        <x-project-card title="Jiri de Pw"
-                        content="Projet qui consiste à faire un site pour un vrai client dans condition réel avec un cahiers des charges "></x-project-card>
-    </div>
-    <div class="grid mr-4">
-        <x-button name="Créer un Jiri"></x-button>
+        @if($this->jiris->isEmpty())
+            <x-modal name="jiris">
+                <x-slot:empty_content>
+                    <x-empty-state information="Aucun jiris pour le moment"
+                                   action="Créer un jiri" open-event="open-project"></x-empty-state>
+                </x-slot:empty_content>
+                <livewire:livewire.form.create_jiri></livewire:livewire.form.create_jiri>
+            </x-modal>
+        @endif
+        @foreach($this->jiris as $jiri)
+            <x-project-card title="{{$jiri->name_project}}"
+                            content="{{$jiri->description}} "
+                            date="{{$jiri->date_jiri}}"
+                            hours_start="{{$jiri->hours_start}}"
+                            hours_end="{{$jiri->hours_end}}"
+            ></x-project-card>
+        @endforeach
     </div>
 </div>

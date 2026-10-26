@@ -8,19 +8,35 @@ new class extends Component {
     {
         return \App\Models\Contact::orderBy('name')->get();
     }
+
+    #[\Livewire\Attributes\Computed]
+    public function jiris()
+    {
+        return \App\Models\Jiri::orderBy('name')->get();
+    }
+
+    #[\Livewire\Attributes\Computed]
+    public function projects()
+    {
+        return \App\Models\Project::orderBy('name')->get();
+    }
 };
 ?>
 
 <div>
 
-    <x-modal name="jiri">
-        <x-slot:empty_content>
-            <x-empty-state title="Liste des Jiris" information="Aucun Jiri pour le moment"
-                           action="Créer un Jiri" open-event="open-jiri"></x-empty-state>
-        </x-slot:empty_content>
+    @if($this->jiris->isEmpty())
+        <x-modal name="jiri">
+            <x-slot:empty_content>
+                <x-empty-state title="Liste des Jiris" information="Aucun Jiri pour le moment"
+                               action="Créer un Jiri" open-event="open-jiri"></x-empty-state>
+            </x-slot:empty_content>
 
-        <livewire:livewire.form.create_jiri/>
-    </x-modal>
+            <livewire:livewire.form.create_jiri/>
+        </x-modal>
+    @else
+        <livewire:livewire.pages.jiri></livewire:livewire.pages.jiri>
+    @endif
 
 
     @if($this->contacts->isEmpty())
@@ -35,14 +51,15 @@ new class extends Component {
         <livewire:livewire.pages.contact></livewire:livewire.pages.contact>
     @endif
 
-
-    <x-modal name="project">
-        <x-slot:empty_content>
-            <x-empty-state title="Liste des projets" information="Aucun Projet pour le moment"
-                           action="Créer un Projet" open-event="open-project"></x-empty-state>
-        </x-slot:empty_content>
-        <livewire:livewire.form.create_project></livewire:livewire.form.create_project>
-    </x-modal>
-
-
+    @if($this->projects->isEmpty())
+        <x-modal name="project">
+            <x-slot:empty_content>
+                <x-empty-state title="Liste des projets" information="Aucun Projet pour le moment"
+                               action="Créer un Projet" open-event="open-project"></x-empty-state>
+            </x-slot:empty_content>
+            <livewire:livewire.form.create_project></livewire:livewire.form.create_project>
+        </x-modal>
+    @else
+        <livewire:livewire.pages.project></livewire:livewire.pages.project>
+        @endif
 </div>
