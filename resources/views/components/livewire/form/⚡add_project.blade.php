@@ -1,8 +1,12 @@
 <?php
 
+use App\Livewire\Forms\AddProject;
 use Livewire\Component;
 
 new class extends Component {
+
+    public AddProject $form;
+
     #[\Livewire\Attributes\Computed]
     public function projects()
     {

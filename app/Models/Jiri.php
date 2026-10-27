@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Jiri extends Model
 {
@@ -17,4 +18,20 @@ class Jiri extends Model
         'hours_start',
         'hours_end',
     ];
+
+
+    public function projects(): BelongsToMany
+    {
+        return $this->belongsToMany(Project::class);
+    }
+
+    public function contacts(): BelongsToMany
+    {
+        return $this->belongsToMany(Contact::class);
+    }
+
+    public function projects2(): BelongsToMany
+    {
+        return $this->belongsToMany(Project::class, 'jiri_project', 'jiri_id', 'project_id');
+    }
 }

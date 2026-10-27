@@ -14,7 +14,7 @@ new class extends Component {
 <div>
 
     <div class="flex justify-between py-6 pr-4">
-        <h2 class="text-xl font-bold flex items-center">Liste des jiris</h2>
+        <h2 class="title">Liste des jiris</h2>
         <x-modal name="jiris">
             <x-slot:empty_content>
                 <x-empty-state
@@ -42,7 +42,7 @@ new class extends Component {
                          date="{{$jiri->date_jiri}}"
                          hours_start="{{$jiri->hours_start}}"
                          hours_end="{{$jiri->hours_end}}"
-                         link="{{route('jiri-create')}}"></x-jiri-card>
+                         link="{{route('jiri-create',$jiri->id)}}"></x-jiri-card>
         @endforeach
     </div>
 </div>

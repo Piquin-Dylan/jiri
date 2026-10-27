@@ -3,12 +3,23 @@
 use Livewire\Component;
 
 new class extends Component {
-    //
+
+    public $jiri;
+
+    public function mount($jiri)
+    {
+        $this->jiri = \App\Models\Jiri::findOrFail($jiri);
+
+    }
 };
 ?>
 
 <div>
 
+    <div class="flex justify-between mr-4">
+        <h2 class="title">{{$jiri->name_project}}</h2>
+        <span class="title">{{$jiri->date_jiri}} - {{$jiri->hours_start}} - {{$jiri->hours_end}}</span>
+    </div>
 
     <x-modal name="project">
         <x-slot:empty_content>

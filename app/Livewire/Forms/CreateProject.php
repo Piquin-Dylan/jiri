@@ -4,19 +4,23 @@ namespace App\Livewire\Forms;
 
 
 use App\Models\Contact;
+use App\Models\Project;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 
 class CreateProject extends Form
 {
     #[Validate('required')]
-    public $name = '';
+    public $name_project = '';
 
     #[Validate('required')]
-    public $email = '';
+    public $description = '';
 
     #[Validate('required')]
-    public $photo = '';
+    public $link = '';
+
+    #[Validate('required')]
+    public $tasks = '';
 
 
 
@@ -25,10 +29,11 @@ class CreateProject extends Form
     {
         $this->validate();
 
-        Contact::create([
-            'name' => $this->name,
-            'email' => $this->email,
-            'photo' => $this->photo,
+        Project::create([
+            'name_project' => $this->name_project,
+            'description' => $this->description,
+            'link' => $this->link,
+            'task' => $this->tasks,
 
         ]);
     }
