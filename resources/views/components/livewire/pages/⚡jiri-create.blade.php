@@ -27,7 +27,7 @@ new class extends Component {
                            information="Aucun projet pour le moment est associé au jiri"
                            action="Ajouter un Projet" open-event="open-project"></x-empty-state>
         </x-slot:empty_content>
-        <livewire:livewire.form.add_project></livewire:livewire.form.add_project>
+        <livewire:livewire.form.add_project :jiri="$jiri"></livewire:livewire.form.add_project>
     </x-modal>
 
 
@@ -37,6 +37,6 @@ new class extends Component {
                            information="Aucun contacts pour le moment est associé au jiri"
                            action="Ajouter un Contact" open-event="open-contact"></x-empty-state>
         </x-slot:empty_content>
-        <livewire:livewire.form.add_contact></livewire:livewire.form.add_contact>
+        <livewire:livewire.form.add_contact :jiri="$jiri"></livewire:livewire.form.add_contact>
     </x-modal>
 </div>

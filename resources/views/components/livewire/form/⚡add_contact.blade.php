@@ -3,6 +3,13 @@
 use Livewire\Component;
 
 new class extends Component {
+
+
+    public function mount($jiri)
+    {
+
+    }
+
     #[\Livewire\Attributes\Computed]
     public function contacts()
     {
