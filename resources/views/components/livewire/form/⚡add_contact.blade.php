@@ -1,13 +1,17 @@
 <?php
 
+use App\Livewire\Forms\AddContact;
+use App\Models\Jiri;
 use Livewire\Component;
 
 new class extends Component {
 
+    public AddContact $form;
 
-    public function mount($jiri)
+
+    public function mount(Jiri $jiri): void
     {
-
+        $this->form->jiri = $jiri;
     }
 
     #[\Livewire\Attributes\Computed]
@@ -15,11 +19,17 @@ new class extends Component {
     {
         return \App\Models\Contact::orderBy('name')->get();
     }
+
+
+    public function save()
+    {
+        $this->form->store();
+    }
 };
 ?>
 
 <div>
-    <form class="form" action="#" method="post">
+    <form class="form" wire:submit.prevent="save">
 
         <x-form.title_subtitle title="Ajouter des contacts"
                                subtitle="Ajouter des contacts a votre jiri"></x-form.title_subtitle>
@@ -45,7 +55,7 @@ new class extends Component {
                         </div>
                     </div>
                 </div>
-                <input type="checkbox">
+                <input value="{{$contact->id}}" wire:model="form.contact" type="checkbox">
             </div>
         @endforeach
 
