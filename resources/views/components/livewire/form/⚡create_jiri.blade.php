@@ -28,7 +28,7 @@ new class extends Component {
         <x-form.input label="Heure de fin" name="hour" type="time" model="form.hours_end"></x-form.input>
 
 
-        <div class="grid">
+        <div class="grid mt-4">
             <x-button type="submit" name="Créer le Jiri"></x-button>
         </div>
     </form>

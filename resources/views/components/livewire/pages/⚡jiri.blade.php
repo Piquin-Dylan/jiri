@@ -13,7 +13,7 @@ new class extends Component {
 
 <div>
 
-    <div class="flex justify-between py-6 pr-4">
+    <div class="flex justify-between pt-6 pr-4">
         <h2 class="title">Liste des jiris</h2>
         <x-modal name="jiris">
             <x-slot:empty_content>

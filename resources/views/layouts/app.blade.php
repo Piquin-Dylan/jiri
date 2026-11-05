@@ -17,7 +17,9 @@
     <x-navigation.sidebar/>
 @endunless
 
-<main @class(['min-h-screen', 'pl-68 pt-4' => ! request()->routeIs('login', 'register','password.request','password.reset')])>
+<main @class([
+    'min-h-screen',
+    'px-4 pt-16 md:pt-4 md:pl-68 md:pr-4' => ! request()->routeIs('login', 'register', 'password.request', 'password.reset'),])>
     {{ $slot }}
 </main>
 </body>

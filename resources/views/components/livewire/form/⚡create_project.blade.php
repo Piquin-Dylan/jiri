@@ -24,7 +24,7 @@ new class extends Component {
         <x-form.input label="Taches" name="tache" type="text" model="form.tasks"></x-form.input>
 
 
-        <div class="grid">
+        <div class="grid mt-4">
             <x-button name="Créer le Projet"></x-button>
         </div>
     </form>

@@ -8,11 +8,11 @@
             <x-form.input label="Mot de passe" name="password" type="password"
                           placeHolder="Saisissez votre mot de passe"></x-form.input>
 
-            <div class=" flex justify-end">
+            <div class=" flex justify-end mt-2 mb-4">
                 <a href="{{route('password.request')}}" class="mt-2">Mot de passe oublié ?</a>
             </div>
             <div class="grid">
-                <x-button name="Se connecter"></x-button>
+                <x-button class="mb-4" name="Se connecter"></x-button>
                 <a class="text-center" href="{{route('register')}}">Créer un compte</a>
             </div>
         </form>

@@ -59,7 +59,7 @@ new class extends Component {
             </div>
         @endforeach
 
-        <div class="grid">
+        <div class="grid mt-4">
             <x-button name="Ajouter le contact"></x-button>
         </div>
     </form>

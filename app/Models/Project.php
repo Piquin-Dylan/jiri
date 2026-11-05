@@ -25,9 +25,5 @@ class Project extends Model
         return $this->belongsToMany(Jiri::class);
     }
 
-    public function jiris2(): BelongsToMany
-    {
-        return $this->belongsToMany(Jiri::class, 'jiri_project', 'project_id', 'jiri_id');
-    }
 
 }

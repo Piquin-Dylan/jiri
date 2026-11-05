@@ -27,7 +27,7 @@ new class extends Component {
         <x-form.input label="Photo" name="photo" type="file" model="form.photo"></x-form.input>
 
 
-        <div class="grid">
+        <div class="grid mt-4">
             <x-button name="Créer le Contact"></x-button>
         </div>
     </form>
