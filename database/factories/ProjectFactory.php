@@ -16,6 +16,7 @@ class ProjectFactory extends Factory
             'description' => fake()->paragraph(),
             'link' => fake()->url(),
             'task' => fake()->optional()->sentence(),
+            'user_id' => null,
         ];
     }
 }

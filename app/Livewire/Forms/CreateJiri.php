@@ -4,6 +4,7 @@ namespace App\Livewire\Forms;
 
 
 use App\Models\Jiri;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 
@@ -30,12 +31,16 @@ class CreateJiri extends Form
     {
         $this->validate();
 
+        $user = Auth::user()->getAuthIdentifier();
+
+
         Jiri::create([
             'name_project' => $this->name_project,
             'description' => $this->description,
             'date_jiri' => $this->date_jiri,
             'hours_start' => $this->hours_start,
             'hours_end' => $this->hours_end,
+            'user_id' => $user,
         ]);
     }
 }

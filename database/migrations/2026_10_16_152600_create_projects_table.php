@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->string('link');
             $table->string('task')->nullable();
             $table->timestamps();
+            $table->foreignId('user_id')->constrained('users');
         });
     }
 

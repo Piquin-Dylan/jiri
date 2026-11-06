@@ -13,6 +13,7 @@ return new class extends Migration {
             $table->string('email');
             $table->string('photo')->nullable();
             $table->timestamps();
+            $table->foreignId('user_id')->constrained('users');
         });
     }
 

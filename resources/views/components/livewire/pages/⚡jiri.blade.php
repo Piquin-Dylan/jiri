@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Jiri;
 use Livewire\Component;
 
 new class extends Component {
@@ -9,7 +10,9 @@ new class extends Component {
     #[\Livewire\Attributes\Computed]
     public function jiris()
     {
-        return \App\Models\Jiri::where('jiris.name_project', 'like', "%{$this->query}%")->get();
+        return Jiri::where('user_id', Auth::id())
+            ->when($this->query, fn($q) => $q->where('name_project', 'like', "%{$this->query}%"))
+            ->get();
     }
 };
 ?>

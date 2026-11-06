@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Jiri extends Model
@@ -17,6 +18,8 @@ class Jiri extends Model
         'date_jiri',
         'hours_start',
         'hours_end',
+        'users_id',
+        'user_id',
     ];
 
 
@@ -28,6 +31,11 @@ class Jiri extends Model
     public function contacts(): BelongsToMany
     {
         return $this->belongsToMany(Contact::class);
+    }
+
+    public function users(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 
 }

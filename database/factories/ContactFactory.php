@@ -15,6 +15,7 @@ class ContactFactory extends Factory
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
+            'user_id' => null,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ];

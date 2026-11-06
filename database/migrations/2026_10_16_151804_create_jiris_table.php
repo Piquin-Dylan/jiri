@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->date('date_jiri');
             $table->string('hours_start');
             $table->string('hours_end');
+            $table->foreignUuid('user_id')->constrained('users');
 
             $table->timestamps();
         });

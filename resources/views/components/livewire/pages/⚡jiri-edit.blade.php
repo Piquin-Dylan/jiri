@@ -1,11 +1,12 @@
 <?php
 
-use App\Models\Contact;
 use App\Models\Jiri;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
 new #[Title('Jiri-edit')] class extends Component {
+
+
 
     public Jiri $jiri;
 
@@ -18,6 +19,7 @@ new #[Title('Jiri-edit')] class extends Component {
 
         $this->contacts = $this->jiri->contacts;
         $this->projects = $this->jiri->projects;
+
     }
 };
 ?>
@@ -46,7 +48,7 @@ new #[Title('Jiri-edit')] class extends Component {
             </x-slot:empty_content>
             <livewire:livewire.form.add_project :jiri="$jiri"></livewire:livewire.form.add_project>
         </x-modal>
-        <x-search-bar placeHolder="Rechercher un projet"></x-search-bar>
+        <x-search-bar  placeHolder="Rechercher un projet"></x-search-bar>
 
     @endif
     <div class="md:flex md:justify-between mb-16">
@@ -83,6 +85,7 @@ new #[Title('Jiri-edit')] class extends Component {
         'jiri'=>$this->jiri->id,
         'student' => $c->id
 ])}}" name="{{$c->name}}"
-                        email="{{$c->email}}"></x-contact-card>
+                        email="{{$c->email}}"
+        ></x-contact-card>
     @endforeach
 </div>
