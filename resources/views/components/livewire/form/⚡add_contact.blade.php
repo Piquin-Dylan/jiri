@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\Forms\AddContact;
+use App\Models\Contact;
 use App\Models\Jiri;
 use Livewire\Component;
 
@@ -8,16 +9,25 @@ new class extends Component {
 
     public AddContact $form;
 
+    public $query = "";
+
 
     public function mount(Jiri $jiri): void
     {
         $this->form->jiri = $jiri;
     }
 
+
+    #[\Livewire\Attributes\On('contact-add')]
+    public function refresh()
+    {
+
+    }
+
     #[\Livewire\Attributes\Computed]
     public function contacts()
     {
-        return \App\Models\Contact::orderBy('name')->get();
+        return Contact::where('contacts.name', 'like', "%{$this->query}%")->get();
     }
 
 
@@ -37,7 +47,8 @@ new class extends Component {
         <div class="grid mr-4">
             <x-button name="Créer un contact"></x-button>
         </div>
-        <x-search-bar class="mt-6 mb-6" placeHolder="Rechercher un contact"></x-search-bar>
+
+        <x-search-bar wire:model.live="query" class="mt-6 mb-6" placeHolder="Rechercher un contact"></x-search-bar>
 
         @foreach($this->contacts as $contact)
             <div class="flex row justify-between mb-6">
@@ -55,12 +66,15 @@ new class extends Component {
                         </div>
                     </div>
                 </div>
-                <input value="{{$contact->id}}" wire:model="form.contact" type="checkbox">
+
+                <x-form.select label_name="role" for_label="role" name="role" id="role"
+                               :options="\App\Enums\ContactRole::cases()"
+                               wire:model="form.status.{{ $contact->id }}"></x-form.select>
             </div>
         @endforeach
 
         <div class="grid mt-4">
-            <x-button name="Ajouter le contact"></x-button>
+            <x-button x-on:click="$dispatch('contact-add')" name="Ajouter le contact"></x-button>
         </div>
     </form>
 </div>

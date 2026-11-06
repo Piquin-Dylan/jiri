@@ -4,10 +4,12 @@ use Livewire\Component;
 
 new class extends Component {
 
+    public $query = "";
+
     #[\Livewire\Attributes\Computed]
     public function contacts()
     {
-        return \App\Models\Contact::orderBy('name')->get();
+        return \App\Models\Contact::where('contacts.name', 'like', "%{$this->query}%")->get();
     }
 };
 ?>
@@ -24,7 +26,7 @@ new class extends Component {
         </x-modal>
     </div>
 
-    <x-search-bar placeHolder="Rechercher un contact"></x-search-bar>
+    <x-search-bar wire:model.live="query" placeHolder="Rechercher un contact"></x-search-bar>
     @if($this->contacts->isEmpty())
         <x-modal name="contact">
             <x-slot:empty_content>

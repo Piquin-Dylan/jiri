@@ -11,13 +11,19 @@ class AddContact extends Form
     public Jiri $jiri;
 
     #[Validate('required')]
-    public $contact = [];
+    public $status = [];
+
 
     public function store(): void
     {
         $this->validate();
 
-        $this->jiri->contacts()->syncWithoutDetaching($this->contact);
+        $sync = collect($this->status)
+            ->filter()
+            ->map(fn ($role) => ['role' => $role])
+            ->all();
+
+        $this->jiri->contacts()->syncWithoutDetaching($sync);
 
     }
 }

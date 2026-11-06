@@ -18,8 +18,6 @@ new #[Title('Jiri-edit')] class extends Component {
 
         $this->contacts = $this->jiri->contacts;
         $this->projects = $this->jiri->projects;
-
-
     }
 };
 ?>

@@ -3,10 +3,13 @@
 use Livewire\Component;
 
 new class extends Component {
+
+    public $query = "";
+
     #[\Livewire\Attributes\Computed]
     public function jiris()
     {
-        return \App\Models\Jiri::orderBy('name')->get();
+        return \App\Models\Jiri::where('jiris.name_project', 'like', "%{$this->query}%")->get();
     }
 };
 ?>
@@ -25,7 +28,7 @@ new class extends Component {
     </div>
 
 
-    <x-search-bar placeHolder="Rechercher un jiri"></x-search-bar>
+    <x-search-bar wire:model.live="query" placeHolder="Rechercher un jiri"></x-search-bar>
     <div class="md:flex md:justify-between">
         @if($this->jiris->isEmpty())
             <x-modal name="jiris">
@@ -42,7 +45,7 @@ new class extends Component {
                          date="{{$jiri->date_jiri}}"
                          hours_start="{{$jiri->hours_start}}"
                          hours_end="{{$jiri->hours_end}}"
-                         link="{{route('jiri-create',$jiri->id)}}"></x-jiri-card>
+                         link="{{route('jiri-edit',$jiri->id)}}"></x-jiri-card>
         @endforeach
     </div>
 </div>

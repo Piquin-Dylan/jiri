@@ -3,10 +3,13 @@
 use Livewire\Component;
 
 new class extends Component {
+
+    public $query = "";
+
     #[\Livewire\Attributes\Computed]
     public function projects()
     {
-        return \App\Models\Project::orderBy('name')->get();
+        return \App\Models\Project::where('projects.name_project', 'like', "%{$this->query}%")->get();
     }
 };
 ?>
@@ -22,7 +25,7 @@ new class extends Component {
             <livewire:livewire.form.create_project></livewire:livewire.form.create_project>
         </x-modal>
     </div>
-    <x-search-bar placeHolder="Rechercher un projet"></x-search-bar>
+    <x-search-bar wire:model.live="query" placeHolder="Rechercher un projet"></x-search-bar>
 
     @if($this->projects->isEmpty())
         <x-modal name="project">

@@ -27,9 +27,9 @@
             <ul class="flex flex-col gap-6 text-2xl font-semibold text-black w-full px-6"
                 @click="open = false">
                 <x-navigation.nav name="Accueil" link="dashboard"/>
-                <x-navigation.nav name="Jiri" link="jiri"/>
+                <x-navigation.nav name="Jiris" link="jiri"/>
                 <x-navigation.nav name="Contacts" link="contact"/>
-                <x-navigation.nav name="Projet" link="project"/>
+                <x-navigation.nav name="Projets" link="project"/>
                 <x-form.logout/>
             </ul>
         </nav>

@@ -6,10 +6,9 @@ use Livewire\Component;
 
 new #[Title('Accueil')] class extends Component {
 
-    #[On('')]
+    #[On('jiri-created')]
     public function refresh()
     {
-
     }
 
     #[\Livewire\Attributes\Computed]
@@ -19,22 +18,22 @@ new #[Title('Accueil')] class extends Component {
     }
 
     #[\Livewire\Attributes\Computed]
-    public function jiris()
+    public function jirisCount()
     {
-        return \App\Models\Jiri::orderBy('name')->get();
+        return \App\Models\Jiri::count();
     }
 
     #[\Livewire\Attributes\Computed]
-    public function projects()
+    public function projectsCount()
     {
-        return \App\Models\Project::orderBy('name')->get();
+        return \App\Models\Project::count();
     }
 };
 ?>
 
 <div>
 
-    @if($this->jiris->isEmpty())
+    @if($this->jirisCount === 0)
         <x-modal name="jiri">
             <x-slot:empty_content>
                 <x-empty-state title="Liste des Jiris" information="Aucun Jiri pour le moment"
@@ -48,7 +47,7 @@ new #[Title('Accueil')] class extends Component {
     @endif
 
 
-    @if($this->contactsCount===0)
+    @if($this->contactsCount === 0)
         <x-modal name="contact">
             <x-slot:empty_content>
                 <x-empty-state title="Liste des Contacts" information="Aucun Contact pour le moment"
@@ -60,7 +59,7 @@ new #[Title('Accueil')] class extends Component {
         <livewire:livewire.pages.contact/>
     @endif
 
-    @if($this->projects->isEmpty())
+    @if($this->projectsCount === 0)
         <x-modal name="project">
             <x-slot:empty_content>
                 <x-empty-state title="Liste des projets" information="Aucun Projet pour le moment"

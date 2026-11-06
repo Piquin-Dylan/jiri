@@ -12,4 +12,3 @@
         x-on:click="$dispatch('{{ $openEvent }}')"
         type="button" name="{{$action}}"></x-button>
 </div>
-

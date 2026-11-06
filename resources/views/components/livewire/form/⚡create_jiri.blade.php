@@ -29,7 +29,7 @@ new class extends Component {
 
 
         <div class="grid mt-4">
-            <x-button type="submit" name="Créer le Jiri"></x-button>
+            <x-button x-on:click="$dispatch('jiri-created')"  type="submit" name="Créer le Jiri"></x-button>
         </div>
     </form>
 </div>
