@@ -18,6 +18,7 @@ class Project extends Model
         'link',
         'tasks',
         'task',
+        'user_id',
     ];
 
 

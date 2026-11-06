@@ -30,9 +30,7 @@ new class extends Component {
         </x-modal>
     </div>
 
-
     <x-search-bar wire:model.live="query" placeHolder="Rechercher un jiri"></x-search-bar>
-    <div class="md:flex md:justify-between">
         @if($this->jiris->isEmpty())
             <x-modal name="jiris">
                 <x-slot:empty_content>
@@ -50,5 +48,4 @@ new class extends Component {
                          hours_end="{{$jiri->hours_end}}"
                          link="{{route('jiri-edit',$jiri->id)}}"></x-jiri-card>
         @endforeach
-    </div>
 </div>

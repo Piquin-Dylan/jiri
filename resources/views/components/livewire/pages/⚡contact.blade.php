@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Contact;
 use Livewire\Component;
 
 new class extends Component {
@@ -9,7 +10,10 @@ new class extends Component {
     #[\Livewire\Attributes\Computed]
     public function contacts()
     {
-        return \App\Models\Contact::where('contacts.name', 'like', "%{$this->query}%")->get();
+
+        return Contact::where('user_id', Auth::id())
+            ->when($this->query, fn($q) => $q->where('contacts.name', 'like', "%{$this->query}%"))
+            ->get();
     }
 };
 ?>
@@ -27,7 +31,7 @@ new class extends Component {
     </div>
 
     <x-search-bar wire:model.live="query" placeHolder="Rechercher un contact"></x-search-bar>
-    @if($this->contacts->isEmpty())
+@if($this->contacts->isEmpty())
         <x-modal name="contact">
             <x-slot:empty_content>
                 <x-empty-state information="Aucun Contact pour le moment"

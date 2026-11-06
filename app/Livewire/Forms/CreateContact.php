@@ -4,7 +4,7 @@ namespace App\Livewire\Forms;
 
 
 use App\Models\Contact;
-use App\Models\Jiri;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 
@@ -20,16 +20,18 @@ class CreateContact extends Form
     public $photo = '';
 
 
-
-
     public function store(): void
     {
         $this->validate();
+
+        $user = Auth::user()->getAuthIdentifier();
+
 
         Contact::create([
             'name' => $this->name,
             'email' => $this->email,
             'photo' => $this->photo,
+            'user_id' => $user
 
         ]);
     }

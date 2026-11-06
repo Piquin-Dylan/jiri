@@ -3,8 +3,8 @@
 namespace App\Livewire\Forms;
 
 
-use App\Models\Contact;
 use App\Models\Project;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 
@@ -23,17 +23,18 @@ class CreateProject extends Form
     public $tasks = '';
 
 
-
-
     public function store(): void
     {
         $this->validate();
+
+        $user = Auth::user()->getAuthIdentifier();
 
         Project::create([
             'name_project' => $this->name_project,
             'description' => $this->description,
             'link' => $this->link,
             'task' => $this->tasks,
+            'user_id' => $user
 
         ]);
     }
