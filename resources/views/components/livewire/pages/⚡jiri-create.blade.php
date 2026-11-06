@@ -1,20 +1,23 @@
 <?php
 
+use App\Models\Contact;
+use App\Models\Jiri;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 
-new class extends Component {
+new #[Title('Jiri-edit')] class extends Component {
 
-    public $jiri;
+    public Jiri $jiri;
 
-    public $contact;
-    public $project;
+    public \Illuminate\Database\Eloquent\Collection $contacts;
+    public \Illuminate\Database\Eloquent\Collection $projects;
 
     public function mount($jiri)
     {
-        $this->jiri = \App\Models\Jiri::findOrFail($jiri);
+        $this->jiri = $jiri;
 
-        $this->contact = $this->jiri->contacts()->get();
-        $this->project = $this->jiri->projects()->get();
+        $this->contacts = $this->jiri->contacts;
+        $this->projects = $this->jiri->projects;
 
 
     }
@@ -28,7 +31,7 @@ new class extends Component {
         <span class="title">{{$jiri->date_jiri}} - {{$jiri->hours_start}} - {{$jiri->hours_end}}</span>
     </div>
 
-    @if($this->project->isEmpty())
+    @if($this->projects->isEmpty())
         <x-modal name="project">
             <x-slot:empty_content>
                 <x-empty-state title="Listes des projets du jiri"
@@ -50,14 +53,14 @@ new class extends Component {
     @endif
     <div class="md:flex md:justify-between mb-16">
 
-        @foreach($this->project as $p)
+        @foreach($this->projects as $p)
             <x-project-card title="{{$p->name_project}}"
                             content="{{$p->description}}"></x-project-card>
         @endforeach
     </div>
 
 
-    @if($this->contact->isEmpty())
+    @if($this->contacts->isEmpty())
         <x-modal name="contact">
             <x-slot:empty_content>
                 <x-empty-state title="Listes des contacts du jiri"
@@ -77,7 +80,11 @@ new class extends Component {
         <x-search-bar placeHolder="Rechercher un contact"></x-search-bar>
 
     @endif
-    @foreach($this->contact as $c)
-        <x-contact-card name="{{$c->name}}" email="{{$c->email}}"></x-contact-card>
+    @foreach($this->contacts as $c)
+        <x-contact-card href="{{route('jiri-student',[
+        'jiri'=>$this->jiri->id,
+        'student' => $c->id
+])}}" name="{{$c->name}}"
+                        email="{{$c->email}}"></x-contact-card>
     @endforeach
 </div>

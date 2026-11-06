@@ -1,12 +1,21 @@
 <?php
 
+use Livewire\Attributes\On;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 
-new class extends Component {
-    #[\Livewire\Attributes\Computed]
-    public function contacts()
+new #[Title('Accueil')] class extends Component {
+
+    #[On('')]
+    public function refresh()
     {
-        return \App\Models\Contact::orderBy('name')->get();
+
+    }
+
+    #[\Livewire\Attributes\Computed]
+    public function contactsCount()
+    {
+        return \App\Models\Contact::count();
     }
 
     #[\Livewire\Attributes\Computed]
@@ -35,20 +44,20 @@ new class extends Component {
             <livewire:livewire.form.create_jiri/>
         </x-modal>
     @else
-        <livewire:livewire.pages.jiri></livewire:livewire.pages.jiri>
+        <livewire:livewire.pages.jiri/>
     @endif
 
 
-    @if($this->contacts->isEmpty())
+    @if($this->contactsCount===0)
         <x-modal name="contact">
             <x-slot:empty_content>
                 <x-empty-state title="Liste des Contacts" information="Aucun Contact pour le moment"
                                action="Créer un Contact" open-event="open-contact"></x-empty-state>
             </x-slot:empty_content>
-            <livewire:livewire.form.create_contact></livewire:livewire.form.create_contact>
+            <livewire:livewire.form.create_contact/>
         </x-modal>
     @else
-        <livewire:livewire.pages.contact></livewire:livewire.pages.contact>
+        <livewire:livewire.pages.contact/>
     @endif
 
     @if($this->projects->isEmpty())
@@ -61,5 +70,5 @@ new class extends Component {
         </x-modal>
     @else
         <livewire:livewire.pages.project></livewire:livewire.pages.project>
-        @endif
+    @endif
 </div>

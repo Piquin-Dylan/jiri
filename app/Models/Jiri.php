@@ -27,7 +27,7 @@ class Jiri extends Model
 
     public function contacts(): BelongsToMany
     {
-        return $this->belongsToMany(Contact::class,'jiri_contact');
+        return $this->belongsToMany(Contact::class);
     }
 
 }

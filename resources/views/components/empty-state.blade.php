@@ -2,7 +2,7 @@
     'title'=>'',
     'information'=>"",
     'action',
-    'openEvent'=>'open-modal'
+    'openEvent'=>''
 ])
 
 <div class="flex justify-between mb-6">
