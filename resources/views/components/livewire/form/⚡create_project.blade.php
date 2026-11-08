@@ -10,6 +10,9 @@ new class extends Component {
     public function save(): void
     {
         $this->form->store();
+
+        $this->dispatch('close-project');
+        $this->dispatch('data-created');
     }
 };
 ?>

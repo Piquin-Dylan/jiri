@@ -6,7 +6,7 @@ use Livewire\Component;
 
 new #[Title('Accueil')] class extends Component {
 
-    #[On('jiri-created')]
+    #[On('data-created')]
     public function refresh()
     {
     }
@@ -21,6 +21,7 @@ new #[Title('Accueil')] class extends Component {
     public function jirisCount()
     {
         return \App\Models\Jiri::count();
+
     }
 
     #[\Livewire\Attributes\Computed]

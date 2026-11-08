@@ -10,6 +10,10 @@ new class extends Component {
     public function save(): void
     {
         $this->form->store();
+
+        $this->dispatch('close-jiri');
+        $this->dispatch('data-created');
+
     }
 
 };
@@ -29,7 +33,7 @@ new class extends Component {
 
 
         <div class="grid mt-4">
-            <x-button x-on:click="$dispatch('jiri-created')"  type="submit" name="Créer le Jiri"></x-button>
+            <x-button type="submit" name="Créer le Jiri"></x-button>
         </div>
     </form>
 </div>
