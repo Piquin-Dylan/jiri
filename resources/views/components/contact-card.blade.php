@@ -2,6 +2,7 @@
     'name',
     'email',
     'href' => null,
+    'delete'=>null,
 ])
 
 <div class="flex justify-between p-4">
@@ -20,7 +21,7 @@
     </div>
 
     <div>
-        <span class="mr-4">Supprimer</span>
+        <span wire:click="{{$delete}}" class="mr-4 cursor-pointer">Supprimer</span>
 
         @if ($href)
             <a href="{{ $href }}">Voir</a>

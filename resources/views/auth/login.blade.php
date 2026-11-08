@@ -4,10 +4,16 @@
             @csrf
             <x-form.title_subtitle title="Connexion"
                                    subtitle="Accédez à votre espace pour gérer vos jiri et vos contacts"></x-form.title_subtitle>
-            <x-form.input label="Email" name="email" type="email" placeHolder="John@gmail.com"></x-form.input>
+            <x-form.input label="Email" name="email" type="email" placeHolder="John@gmail.com" value="{{old('email')}}"></x-form.input>
+            @error('email')
+            <p class="text-red-500">{{$message}}</p>
+            @enderror
             <x-form.input label="Mot de passe" name="password" type="password"
-                          placeHolder="Saisissez votre mot de passe"></x-form.input>
+                          placeHolder="Saisissez votre mot de passe" value="{{old('password')}}"></x-form.input>
 
+            @error('email')
+            <p class="text-red-500">{{$message}}</p>
+            @enderror
             <div class=" flex justify-end mt-2 mb-4">
                 <a href="{{route('password.request')}}" class="mt-2">Mot de passe oublié ?</a>
             </div>

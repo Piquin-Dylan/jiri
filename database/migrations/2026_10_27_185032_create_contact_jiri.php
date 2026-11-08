@@ -13,7 +13,7 @@ return new class extends Migration
             $table->foreignUuid('jiri_id')->constrained('jiris');
             $table->foreignUuid('contact_id')->constrained('contacts');
             $table->primary(['jiri_id', 'contact_id']);
-            $table->enum('status', ContactRole::cases());
+            $table->enum('role', ContactRole::cases());
         });
     }
 

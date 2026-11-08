@@ -7,7 +7,6 @@ use Livewire\Component;
 new #[Title('Jiri-edit')] class extends Component {
 
 
-
     public Jiri $jiri;
 
     public \Illuminate\Database\Eloquent\Collection $contacts;
@@ -20,6 +19,11 @@ new #[Title('Jiri-edit')] class extends Component {
         $this->contacts = $this->jiri->contacts;
         $this->projects = $this->jiri->projects;
 
+    }
+
+    public function deleteContact()
+    {
+         $this->jiri->contacts()->delete();
     }
 };
 ?>
@@ -48,7 +52,7 @@ new #[Title('Jiri-edit')] class extends Component {
             </x-slot:empty_content>
             <livewire:livewire.form.add_project :jiri="$jiri"></livewire:livewire.form.add_project>
         </x-modal>
-        <x-search-bar  placeHolder="Rechercher un projet"></x-search-bar>
+        <x-search-bar placeHolder="Rechercher un projet"></x-search-bar>
 
     @endif
     <div class="md:flex md:justify-between mb-16">
@@ -83,9 +87,10 @@ new #[Title('Jiri-edit')] class extends Component {
     @foreach($this->contacts as $c)
         <x-contact-card href="{{route('jiri-student',[
         'jiri'=>$this->jiri->id,
-        'student' => $c->id
-])}}" name="{{$c->name}}"
-                        email="{{$c->email}}"
-        ></x-contact-card>
+        'student' => $c->id])}}"
+        name="{{$c->name}}"
+        email="{{$c->email}}"
+        delete="deleteContact"></x-contact-card>
+
     @endforeach
 </div>
