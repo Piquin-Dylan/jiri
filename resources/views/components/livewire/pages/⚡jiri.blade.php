@@ -1,11 +1,17 @@
 <?php
 
 use App\Models\Jiri;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 new class extends Component {
 
     public $query = "";
+
+    #[On('data-created')]
+    public function refresh()
+    {
+    }
 
     #[\Livewire\Attributes\Computed]
     public function jiris()

@@ -1,11 +1,17 @@
 <?php
 
 use App\Models\Contact;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 new class extends Component {
 
     public $query = "";
+
+    #[On('data-created')]
+    public function refresh()
+    {
+    }
 
     #[\Livewire\Attributes\Computed]
     public function contacts()
@@ -31,7 +37,7 @@ new class extends Component {
     </div>
 
     <x-search-bar wire:model.live="query" placeHolder="Rechercher un contact"></x-search-bar>
-@if($this->contacts->isEmpty())
+    @if($this->contacts->isEmpty())
         <x-modal name="contact">
             <x-slot:empty_content>
                 <x-empty-state information="Aucun Contact pour le moment"

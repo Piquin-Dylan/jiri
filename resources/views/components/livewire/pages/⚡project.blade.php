@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Project;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 new class extends Component {
@@ -10,6 +11,10 @@ new class extends Component {
     public $test;
 
 
+    #[On('data-created')]
+    public function refresh()
+    {
+    }
 
     #[\Livewire\Attributes\Computed]
     public function projects()
@@ -33,7 +38,7 @@ new class extends Component {
         </x-modal>
     </div>
     <x-search-bar wire:model.live="query" placeHolder="Rechercher un projet"></x-search-bar>
-@if($this->projects->isEmpty() )
+    @if($this->projects->isEmpty() )
         <x-modal name="project">
             <x-slot:empty_content>
                 <x-empty-state information="Aucun projet pour le moment"

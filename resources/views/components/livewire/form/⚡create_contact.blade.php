@@ -13,6 +13,9 @@ new class extends Component {
     public function save(): void
     {
         $this->form->store();
+
+        $this->dispatch('close-contact');
+        $this->dispatch('data-created');
     }
 };
 ?>

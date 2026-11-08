@@ -2,6 +2,7 @@
 
 
 <div
+    x-cloak
     x-data="{ open: false }"
     x-on:open-{{ $name }}.window="open = true"
     x-on:close-{{ $name }}.window="open = false"

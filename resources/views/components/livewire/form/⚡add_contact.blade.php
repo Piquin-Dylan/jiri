@@ -3,6 +3,7 @@
 use App\Livewire\Forms\AddContact;
 use App\Models\Contact;
 use App\Models\Jiri;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 new class extends Component {
@@ -17,13 +18,6 @@ new class extends Component {
         $this->form->jiri = $jiri;
     }
 
-
-    #[\Livewire\Attributes\On('contact-add')]
-    public function refresh()
-    {
-
-    }
-
     #[\Livewire\Attributes\Computed]
     public function contacts()
     {
@@ -34,6 +28,10 @@ new class extends Component {
     public function save()
     {
         $this->form->store();
+
+
+        $this->dispatch('close-contact');
+        $this->dispatch('data-added');
     }
 };
 ?>
@@ -74,7 +72,7 @@ new class extends Component {
         @endforeach
 
         <div class="grid mt-4">
-            <x-button x-on:click="$dispatch('contact-add')" name="Ajouter le contact"></x-button>
+            <x-button name="Ajouter le contact"></x-button>
         </div>
     </form>
 </div>

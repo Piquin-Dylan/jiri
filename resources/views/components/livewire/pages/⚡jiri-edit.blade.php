@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Jiri;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
@@ -9,21 +10,34 @@ new #[Title('Jiri-edit')] class extends Component {
 
     public Jiri $jiri;
 
-    public \Illuminate\Database\Eloquent\Collection $contacts;
-    public \Illuminate\Database\Eloquent\Collection $projects;
+
+
+    #[On('data-added')]
+    public function refresh()
+    {
+    }
 
     public function mount($jiri)
     {
         $this->jiri = $jiri;
 
-        $this->contacts = $this->jiri->contacts;
-        $this->projects = $this->jiri->projects;
+    }
 
+    #[\Livewire\Attributes\Computed]
+    public function contacts()
+    {
+        return $this->jiri->contacts()->get();
+    }
+
+    #[\Livewire\Attributes\Computed]
+    public function projects()
+    {
+        return $this->jiri->projects()->get();
     }
 
     public function deleteContact()
     {
-         $this->jiri->contacts()->delete();
+        $this->jiri->contacts()->delete();
     }
 };
 ?>
@@ -88,9 +102,9 @@ new #[Title('Jiri-edit')] class extends Component {
         <x-contact-card href="{{route('jiri-student',[
         'jiri'=>$this->jiri->id,
         'student' => $c->id])}}"
-        name="{{$c->name}}"
-        email="{{$c->email}}"
-        delete="deleteContact"></x-contact-card>
+                        name="{{$c->name}}"
+                        email="{{$c->email}}"
+                        delete="deleteContact"></x-contact-card>
 
     @endforeach
 </div>
