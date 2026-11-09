@@ -11,7 +11,6 @@ new #[Title('Jiri-edit')] class extends Component {
     public Jiri $jiri;
 
 
-
     #[On('data-added')]
     public function refresh()
     {
@@ -35,9 +34,10 @@ new #[Title('Jiri-edit')] class extends Component {
         return $this->jiri->projects()->get();
     }
 
-    public function deleteContact()
+    public function deleteContact($contactId)
     {
-        $this->jiri->contacts()->delete();
+
+        $this->jiri->contacts()->detach($contactId);
     }
 };
 ?>
@@ -104,7 +104,6 @@ new #[Title('Jiri-edit')] class extends Component {
         'student' => $c->id])}}"
                         name="{{$c->name}}"
                         email="{{$c->email}}"
-                        delete="deleteContact"></x-contact-card>
-
+                        delete="deleteContact('{{$c->id}}')"></x-contact-card>
     @endforeach
 </div>
