@@ -15,14 +15,27 @@ new class extends Component {
 
     public $contact;
 
+
     public function mount($jiri, $student)
     {
         $this->jiri = Jiri::findOrFail($jiri);
         $this->student = Contact::findOrFail($student);
         $this->project = $this->jiri->projects;
-
         $this->form->contact = $this->student;
+
+        $this->contact = $this->student->projects;
+
+        foreach ($this->contact as $c) {
+            $this->form->projects[$c->id] = [
+                'selected' => true,
+                'link_website' => $c->pivot->link_website,
+                'link_github' => $c->pivot->link_github,
+            ];
+        }
+
+
     }
+
 
     public function save()
     {
@@ -51,10 +64,11 @@ new class extends Component {
 
                 <x-form.input model="form.projects.{{ $p->id }}.link_website"
                               name="website-{{ $p->id }}" label="Lien du site" type="text"
-                              placeHolder="https://site-client.com" value="{{}}"></x-form.input>
+                              placeHolder="https://site-client.com"></x-form.input>
 
                 <x-form.input model="form.projects.{{ $p->id }}.link_github"
-                              name="github-{{ $p->id }}" label="Lien du github" type="text"
+                              name="github-{{ $p->id }}" label="Lien du github"
+                              type="text"
                               placeHolder="https://github.com/site-client"></x-form.input>
             </div>
         @endforeach

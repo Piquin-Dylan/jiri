@@ -3,7 +3,8 @@
     'label',
     'type',
     'placeHolder'=>'',
-    'model'=>''
+    'model'=>'',
+    'value'=>''
 ])
 <div {{ $attributes }} class="grid gap-2 mt-4">
 
@@ -12,6 +13,7 @@
            id="{{$name}}" name="{{$name}}"
            placeholder="{{$placeHolder}}"
            wire:model="{{ $model }}"
+           value="{{$value}}"
     >
 
     @error($model)
