@@ -13,6 +13,8 @@ new class extends Component {
     public $student;
     public $project;
 
+    public $contact;
+
     public function mount($jiri, $student)
     {
         $this->jiri = Jiri::findOrFail($jiri);
@@ -37,12 +39,15 @@ new class extends Component {
 
     <span class="title">Fiche de {{ $student->name }}</span>
 
+
     <form wire:submit="save">
         @foreach($project as $p)
-            <div class="flex flex-row">
-                <span>{{ $p->name_project }}</span>
+            <div class="flex flex-col gap-4 px-6 py-6 mb-6 mt-6 border  border-[#385A87] rounded-2xl">
+                <div class="flex flex-row gap-4 ">
+                    <input class="w-[24px]" wire:model="form.projects.{{ $p->id }}.selected" type="checkbox">
+                    <span class="text-xl font-bold">{{ $p->name_project }}</span>
 
-                <input wire:model="form.projects.{{ $p->id }}.selected" type="checkbox">
+                </div>
 
                 <x-form.input model="form.projects.{{ $p->id }}.link_website"
                               name="website-{{ $p->id }}" label="Lien du site" type="text"
