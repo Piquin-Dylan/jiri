@@ -29,4 +29,10 @@ class Contact extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+
+    public function projects(): BelongsToMany
+    {
+        return $this->belongsToMany(Project::class);
+    }
 }

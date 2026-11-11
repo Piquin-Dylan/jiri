@@ -13,8 +13,9 @@ return [
     |
     */
 
-    'failed' => 'These credentials do not match our records.',
-    'password' => 'The provided password is incorrect.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-
+    'connexion' => 'Se connecter',
+    'subtitle' => 'Accédez à votre espace pour gérer vos jiris et vos contacts',
+    'mot_de_passe_oublie' => 'Mot de passe oublié ?',
+    'creer_un_compte' => 'Créer un compte',
+    'subtitle_register' => 'Créez un compte pour accéder à votre espace et gérer vos jiris et vos contacts',
 ];

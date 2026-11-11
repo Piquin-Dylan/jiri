@@ -21,6 +21,11 @@ new class extends Component {
             ->when($this->query, fn($q) => $q->where('contacts.name', 'like', "%{$this->query}%"))
             ->get();
     }
+
+    public function deleteContact($contactId): void
+    {
+        Contact::where('id', $contactId)->delete();
+    }
 };
 ?>
 
@@ -48,7 +53,8 @@ new class extends Component {
     @endif
 
     @foreach($this->contacts as $contact)
-        <x-contact-card name="{{$contact->name}}" email="{{$contact->email}}"></x-contact-card>
+        <x-contact-card delete="deleteContact('{{$contact->id}}')" name="{{$contact->name}}"
+                        email="{{$contact->email}}"></x-contact-card>
     @endforeach
 
 </div>

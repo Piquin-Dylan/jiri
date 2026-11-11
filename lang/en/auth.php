@@ -12,9 +12,10 @@ return [
     | these language lines according to your application's requirements.
     |
     */
-
-    'failed' => 'These credentials do not match our records.',
-    'password' => 'The provided password is incorrect.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    'connexion' => 'Login',
+    'subtitle' => 'Access your workspace to manage your Jiris and your contacts',
+    'mot_de_passe_oublie' => 'Forgot your password?',
+    'creer_un_compte' => 'Create an account',
+    'subtitle_register' => 'Create an account to access your workspace and manage your Jiris and your contacts',
 
 ];

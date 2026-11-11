@@ -32,4 +32,8 @@ class Project extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function contacts(): BelongsToMany
+    {
+        return $this->belongsToMany(Contact::class);
+    }
 }
