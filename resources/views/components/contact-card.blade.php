@@ -3,6 +3,7 @@
     'email',
     'href' => null,
     'delete'=>null,
+    'role'=>null
 ])
 
 <div class="flex justify-between p-4">
@@ -12,7 +13,7 @@
 
         <div class="grid gap-1">
             @if ($href)
-                <a href="{{ $href }}" class="hover:underline">{{ $name }}</a>
+                <a  href="{{ $href }}" class="hover:underline font-bold">{{ $name }} - {{$role}}</a>
             @else
                 <span>{{ $name }}</span>
             @endif

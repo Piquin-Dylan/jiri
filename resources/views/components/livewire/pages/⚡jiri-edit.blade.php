@@ -10,6 +10,8 @@ new #[Title('Jiri-edit')] class extends Component {
 
     public Jiri $jiri;
 
+    public $contact;
+
 
     #[On('data-added')]
     public function refresh()
@@ -34,7 +36,7 @@ new #[Title('Jiri-edit')] class extends Component {
         return $this->jiri->projects()->get();
     }
 
-    public function deleteContact($contactId)
+    public function deleteContact($contactId): void
     {
 
         $this->jiri->contacts()->detach($contactId);
@@ -102,8 +104,10 @@ new #[Title('Jiri-edit')] class extends Component {
         <x-contact-card href="{{route('jiri-student',[
         'jiri'=>$this->jiri->id,
         'student' => $c->id])}}"
+                        role="{{$c->pivot->role}}"
                         name="{{$c->name}}"
                         email="{{$c->email}}"
-                        delete="deleteContact('{{$c->id}}')"></x-contact-card>
+                        delete="deleteContact('{{$c->id}}')">
+        </x-contact-card>
     @endforeach
 </div>
