@@ -68,13 +68,6 @@ new #[Title('Jiri-edit')] class extends Component {
                                action="Ajouter un Projet" open-event="open-project"></x-empty-state>
             </x-slot:empty_content>
             <livewire:livewire.form.add_project :jiri="$jiri"></livewire:livewire.form.add_project>
-
-            <x-drawer event="Créer un projet"
-                      openEvent="open-project"
-                      :showButton="true">
-
-                <livewire:livewire.form.create_project></livewire:livewire.form.create_project>
-            </x-drawer>
         </x-modal>
     @else
         <x-modal name="project">
@@ -84,9 +77,9 @@ new #[Title('Jiri-edit')] class extends Component {
             </x-slot:empty_content>
             <livewire:livewire.form.add_project :jiri="$jiri"></livewire:livewire.form.add_project>
         </x-modal>
-        <x-search-bar wire:model.live="search_project" placeHolder="Rechercher un projet"></x-search-bar>
 
     @endif
+    <x-search-bar wire:model.live="search_project" placeHolder="Rechercher un projet"></x-search-bar>
     <div class="md:flex md:justify-between mb-16">
 
         @foreach($this->projects as $p)
@@ -113,7 +106,6 @@ new #[Title('Jiri-edit')] class extends Component {
             </x-slot:empty_content>
             <livewire:livewire.form.add_contact :jiri="$jiri"></livewire:livewire.form.add_contact>
         </x-modal>
-
     @endif
     <x-search-bar wire:model.live="search_contact" placeHolder="Rechercher un contact"></x-search-bar>
 
