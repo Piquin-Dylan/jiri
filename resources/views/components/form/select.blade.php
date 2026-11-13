@@ -25,7 +25,7 @@
 
         @foreach($options as $option)
             @if($option instanceof \UnitEnum)
-                <option value="{{ $option->value }}">
+                <option value="{{$option->value}}">
                     {{ method_exists($option, 'label') ? $option->label() : $option->value }}
                 </option>
             @else

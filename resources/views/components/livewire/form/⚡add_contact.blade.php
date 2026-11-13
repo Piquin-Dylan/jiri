@@ -9,13 +9,28 @@ use Livewire\Component;
 new class extends Component {
 
     public AddContact $form;
+    public Jiri $jiri;
+
 
     public $query = "";
+
+
+    #[On('data-created')]
+    public function refresh()
+    {
+    }
 
 
     public function mount(Jiri $jiri): void
     {
         $this->form->jiri = $jiri;
+
+
+        $this->form->status = $this->jiri->contacts()
+            ->pluck('role', 'contact_id')
+            ->toArray();
+
+
     }
 
     #[\Livewire\Attributes\Computed]
@@ -32,20 +47,22 @@ new class extends Component {
 
         $this->dispatch('close-contact');
         $this->dispatch('data-added');
+
+
     }
 };
 ?>
 
 <div>
-    <form class="form" wire:submit.prevent="save">
+    <x-drawer event="Créer un contact"
+              openEvent="data-created"
+              :showButton="true">
+        <livewire:livewire.form.create_contact></livewire:livewire.form.create_contact>
+    </x-drawer>
 
+    <form class="form" wire:submit.prevent="save">
         <x-form.title_subtitle title="Ajouter des contacts"
                                subtitle="Ajouter des contacts a votre jiri"></x-form.title_subtitle>
-
-        <div class="grid mt-4">
-            <x-button name="Créer un contact"></x-button>
-        </div>
-
         <x-search-bar wire:model.live="query" class="mt-6 mb-6" placeHolder="Rechercher un contact"></x-search-bar>
 
         @foreach($this->contacts as $contact)

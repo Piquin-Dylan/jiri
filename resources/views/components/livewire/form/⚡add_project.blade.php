@@ -11,6 +11,7 @@ new class extends Component {
     public Jiri $jiri;
 
 
+
     #[On('data-created')]
     public function refresh()
     {
@@ -19,6 +20,12 @@ new class extends Component {
     public function mount(Jiri $jiri): void
     {
         $this->form->jiri = $jiri;
+
+
+        $this->form->project = $this->jiri->projects
+            ->pluck('id')
+            ->map(fn($id) => (string)$id)
+            ->toArray();
     }
 
     #[\Livewire\Attributes\Computed]
@@ -56,7 +63,7 @@ new class extends Component {
                     <span class="text-[16px] font-bold">{{$project->name_project}}</span>
                     <p class="text-[14px] mt-2">{{$project->description}}</p>
                 </div>
-                <input value="{{$project->id}}" type="checkbox" wire:model="form.project">
+                <input  value="{{$project->id}}" type="checkbox" wire:model="form.project">
             </div>
         @endforeach
 
