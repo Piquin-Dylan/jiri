@@ -10,7 +10,8 @@ new #[Title('Jiri-edit')] class extends Component {
 
     public Jiri $jiri;
 
-    public $query = "";
+    public $search_contact = "";
+    public $search_project = "";
 
 
     public $contact;
@@ -30,14 +31,14 @@ new #[Title('Jiri-edit')] class extends Component {
     #[\Livewire\Attributes\Computed]
     public function contacts()
     {
-        return $this->jiri->contacts()->when($this->query, fn($q) => $q->where('contacts.name', 'like', "%{$this->query}%"))->get();
-
+        return $this->jiri->contacts()->when($this->search_contact, fn($q) => $q->where('contacts.name', 'like', "%{$this->search_contact}%"))->get();
     }
 
     #[\Livewire\Attributes\Computed]
     public function projects()
     {
-        return $this->jiri->projects()->get();
+
+      return  $this->jiri->projects()->when($this->search_project, fn($q) => $q->where('projects.name_project', 'like', "%{$this->search_project}%"))->get();
     }
 
     public function deleteContact($contactId): void
@@ -72,7 +73,7 @@ new #[Title('Jiri-edit')] class extends Component {
             </x-slot:empty_content>
             <livewire:livewire.form.add_project :jiri="$jiri"></livewire:livewire.form.add_project>
         </x-modal>
-        <x-search-bar placeHolder="Rechercher un projet"></x-search-bar>
+        <x-search-bar wire:model.live="search_project" placeHolder="Rechercher un projet"></x-search-bar>
 
     @endif
     <div class="md:flex md:justify-between mb-16">
@@ -103,7 +104,7 @@ new #[Title('Jiri-edit')] class extends Component {
         </x-modal>
 
     @endif
-    <x-search-bar wire:model.live="query" placeHolder="Rechercher un contact"></x-search-bar>
+    <x-search-bar wire:model.live="search_contact" placeHolder="Rechercher un contact"></x-search-bar>
 
 @foreach($this->contacts as $c)
         <x-contact-card href="{{route('jiri-student',[
