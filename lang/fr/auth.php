@@ -24,7 +24,6 @@ return [
     'label_password' => 'Mot de passe',
     'label_password_confirmation' => 'Confirmer votre mot de passe',
 
-
     'placeholder_name' => 'John Dupont',
     'placeholder_email' => 'John@gmail.com',
     'placeholder_password' => 'Saisissez votre mot de passe',

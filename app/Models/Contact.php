@@ -19,7 +19,6 @@ class Contact extends Model
         'user_id',
     ];
 
-
     public function jiris(): BelongsToMany
     {
         return $this->belongsToMany(Jiri::class);
@@ -29,7 +28,6 @@ class Contact extends Model
     {
         return $this->belongsTo(User::class);
     }
-
 
     public function projects(): BelongsToMany
     {

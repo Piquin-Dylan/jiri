@@ -17,7 +17,7 @@ class StudentProjectForm extends Form
         $sync = collect($this->projects)
             ->filter(fn ($p) => $p['selected'])
             ->map(fn ($p) => [
-                'link_website' => $p['link_website'] ,
+                'link_website' => $p['link_website'],
                 'link_github' => $p['link_github'],
             ])
             ->all();

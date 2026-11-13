@@ -37,7 +37,7 @@ new class extends Component {
         <x-form.title_subtitle title="Ajouter un projet"
                                subtitle="Ajouter des projets a votre jiri"></x-form.title_subtitle>
 
-        <div class="grid mr-4">
+        <div class="grid mt-4">
             <x-button name="Créer un projet"></x-button>
         </div>
         <x-search-bar class="mt-6 mb-6" placeHolder="Rechercher un projet"></x-search-bar>

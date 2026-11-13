@@ -21,7 +21,6 @@ class Project extends Model
         'user_id',
     ];
 
-
     public function jiris(): BelongsToMany
     {
         return $this->belongsToMany(Jiri::class);

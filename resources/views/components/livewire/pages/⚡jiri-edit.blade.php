@@ -13,6 +13,8 @@ new #[Title('Jiri-edit')] class extends Component {
     public $search_contact = "";
     public $search_project = "";
 
+    public string $filter = 'evaluated';
+
 
     public $contact;
 
@@ -28,22 +30,24 @@ new #[Title('Jiri-edit')] class extends Component {
 
     }
 
+
     #[\Livewire\Attributes\Computed]
     public function contacts()
     {
-        return $this->jiri->contacts()->when($this->search_contact, fn($q) => $q->where('contacts.name', 'like', "%{$this->search_contact}%"))->get();
+        return $this->jiri->{$this->filter}()
+            ->when($this->search_contact, fn($q) => $q->where('contacts.name', 'like', "%{$this->search_contact}%"))
+            ->get();
     }
 
     #[\Livewire\Attributes\Computed]
     public function projects()
     {
-
-      return  $this->jiri->projects()->when($this->search_project, fn($q) => $q->where('projects.name_project', 'like', "%{$this->search_project}%"))->get();
+        return $this->jiri->projects()->when($this->search_project, fn($q) => $q->where('projects.name_project', 'like', "%{$this->search_project}%"))->get();
     }
+
 
     public function deleteContact($contactId): void
     {
-
         $this->jiri->contacts()->detach($contactId);
     }
 };
@@ -106,7 +110,11 @@ new #[Title('Jiri-edit')] class extends Component {
     @endif
     <x-search-bar wire:model.live="search_contact" placeHolder="Rechercher un contact"></x-search-bar>
 
-@foreach($this->contacts as $c)
+
+    <span class="cursor-pointer" wire:click="$set('filter','evaluators',true)">Evaluators</span>
+    <span class="cursor-pointer" wire:click="$set('filter','evaluated',true)">Students</span>
+
+    @foreach($this->contacts as $c)
         <x-contact-card href="{{route('jiri-student',[
         'jiri'=>$this->jiri->id,
         'student' => $c->id])}}"

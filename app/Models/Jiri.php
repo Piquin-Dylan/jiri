@@ -22,7 +22,6 @@ class Jiri extends Model
         'user_id',
     ];
 
-
     public function projects(): BelongsToMany
     {
         return $this->belongsToMany(Project::class);
@@ -33,9 +32,25 @@ class Jiri extends Model
         return $this->belongsToMany(Contact::class)->withPivot('role');
     }
 
+
+    public function evaluators(): BelongsToMany
+    {
+        return $this->contacts()->wherePivot('role', 'Evaluator');
+    }
+
+    public function evaluated(): BelongsToMany
+    {
+        return $this->contacts()->wherePivot('role', 'Evaluated');
+    }
+
+    /*
+     * TODO
+     * une relation pour les étudiants du jiri
+     * une relation pour les évaluateurs du jiri
+     * */
+
     public function users(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
-
 }

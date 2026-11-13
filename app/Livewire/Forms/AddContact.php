@@ -13,14 +13,13 @@ class AddContact extends Form
     #[Validate('required')]
     public $status = [];
 
-
     public function store(): void
     {
         $this->validate();
 
         $sync = collect($this->status)
             ->filter()
-            ->map(fn($role) => ['role' => $role]);
+            ->map(fn ($role) => ['role' => $role]);
 
         $this->jiri->contacts()->syncWithoutDetaching($sync);
 

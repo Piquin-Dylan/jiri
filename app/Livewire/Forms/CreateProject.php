@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Forms;
 
-
 use App\Models\Project;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Validate;
@@ -22,7 +21,6 @@ class CreateProject extends Form
     #[Validate('required')]
     public $tasks = '';
 
-
     public function store(): void
     {
         $this->validate();
@@ -34,9 +32,8 @@ class CreateProject extends Form
             'description' => $this->description,
             'link' => $this->link,
             'task' => $this->tasks,
-            'user_id' => $user
+            'user_id' => $user,
 
         ]);
     }
 }
-

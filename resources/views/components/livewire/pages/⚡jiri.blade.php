@@ -25,7 +25,6 @@ new class extends Component {
 
 <div>
 
-    <div class="flex justify-between pt-6 pr-4">
         <h2 class="title">Liste des jiris</h2>
         <x-modal name="jiris">
             <x-slot:empty_content>
@@ -34,7 +33,6 @@ new class extends Component {
             </x-slot:empty_content>
             <livewire:livewire.form.create_jiri></livewire:livewire.form.create_jiri>
         </x-modal>
-    </div>
 
     <x-search-bar wire:model.live="query" placeHolder="Rechercher un jiri"></x-search-bar>
     @if($this->jiris->isEmpty())
@@ -46,6 +44,7 @@ new class extends Component {
             <livewire:livewire.form.create_jiri></livewire:livewire.form.create_jiri>
         </x-modal>
     @endif
+<div class="flex justify-between pt-6 pr-4">
     @foreach($this->jiris as $jiri)
         <x-jiri-card title="{{$jiri->name_project}}"
                      content="{{$jiri->description}} "
@@ -54,4 +53,5 @@ new class extends Component {
                      hours_end="{{$jiri->hours_end}}"
                      link="{{route('jiri-edit',$jiri->id)}}"></x-jiri-card>
     @endforeach
+</div>
 </div>

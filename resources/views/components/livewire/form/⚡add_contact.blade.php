@@ -42,7 +42,7 @@ new class extends Component {
         <x-form.title_subtitle title="Ajouter des contacts"
                                subtitle="Ajouter des contacts a votre jiri"></x-form.title_subtitle>
 
-        <div class="grid mr-4">
+        <div class="grid mt-4">
             <x-button name="Créer un contact"></x-button>
         </div>
 
