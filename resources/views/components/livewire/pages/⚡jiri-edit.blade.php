@@ -68,6 +68,13 @@ new #[Title('Jiri-edit')] class extends Component {
                                action="Ajouter un Projet" open-event="open-project"></x-empty-state>
             </x-slot:empty_content>
             <livewire:livewire.form.add_project :jiri="$jiri"></livewire:livewire.form.add_project>
+
+            <x-drawer event="Créer un projet"
+                      openEvent="open-project"
+                      :showButton="true">
+
+                <livewire:livewire.form.create_project></livewire:livewire.form.create_project>
+            </x-drawer>
         </x-modal>
     @else
         <x-modal name="project">
@@ -111,7 +118,17 @@ new #[Title('Jiri-edit')] class extends Component {
     <x-search-bar wire:model.live="search_contact" placeHolder="Rechercher un contact"></x-search-bar>
 
 
-  <x-change_color_button></x-change_color_button>
+    <div x-data="{ highlightedButton: 'evaluators' }" class="flex justify-center pt-6 mb-6 gap-4">
+    <span @click="highlightedButton = 'evaluators'"
+          :class="highlightedButton === 'evaluators' ? 'bg-[#385A87] text-white' : 'bg-white text-[#385A87]'"
+          class="cursor-pointer p-4 rounded-2xl text-xl font-bold"
+          wire:click="$set('filter', 'evaluators')">Evaluators</span>
+
+        <span @click="highlightedButton = 'evaluated'"
+              :class="highlightedButton === 'evaluated' ? 'bg-[#385A87] text-white' : 'bg-white text-[#385A87]'"
+              class="cursor-pointer p-4 rounded-2xl text-xl font-bold"
+              wire:click="$set('filter', 'evaluated')">Students</span>
+    </div>
 
 
     @foreach($this->contacts as $c)

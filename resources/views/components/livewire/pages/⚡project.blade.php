@@ -48,10 +48,6 @@ new class extends Component {
         </x-modal>
     @else
 
-
-
-
-
     @endif
     <div class="md:flex md:justify-between">
         @foreach($this->projects as $project)

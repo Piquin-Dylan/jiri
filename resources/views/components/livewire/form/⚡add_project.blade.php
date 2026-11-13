@@ -2,6 +2,7 @@
 
 use App\Livewire\Forms\AddProject;
 use App\Models\Jiri;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 new class extends Component {
@@ -9,6 +10,11 @@ new class extends Component {
     public AddProject $form;
     public Jiri $jiri;
 
+
+    #[On('data-created')]
+    public function refresh()
+    {
+    }
 
     public function mount(Jiri $jiri): void
     {
@@ -32,14 +38,16 @@ new class extends Component {
 ?>
 
 <div>
-    <form class="form" wire:submit.prevent="save">
 
+
+    <x-drawer event="Créer un projet"
+              openEvent="data-created"
+              :showButton="true">
+        <livewire:livewire.form.create_project></livewire:livewire.form.create_project>
+    </x-drawer>
+    <form class="form" wire:submit.prevent="save">
         <x-form.title_subtitle title="Ajouter un projet"
                                subtitle="Ajouter des projets a votre jiri"></x-form.title_subtitle>
-
-        <div class="grid mt-4">
-            <x-button name="Créer un projet"></x-button>
-        </div>
         <x-search-bar class="mt-6 mb-6" placeHolder="Rechercher un projet"></x-search-bar>
 
         @foreach($this->projects as $project)
