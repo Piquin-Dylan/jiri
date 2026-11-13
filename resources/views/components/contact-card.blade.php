@@ -12,10 +12,10 @@
         <span class="m-auto">JD</span>
 
         <div class="grid gap-1">
-            @if ($href)
+            @if ($href && $role === 'Evaluated')
                 <a  href="{{ $href }}" class="hover:underline font-bold">{{ $name }} - {{$role}}</a>
             @else
-                <span>{{ $name }}</span>
+                <span class="font-bold">{{ $name }} - {{$role}}</span>
             @endif
             <span>{{ $email }}</span>
         </div>
@@ -24,10 +24,10 @@
     <div>
         <span wire:click="{{$delete}}" class="mr-4 cursor-pointer">Supprimer</span>
 
-        @if ($href)
+        @if ($href && $role === 'Evaluated')
             <a href="{{ $href }}">Voir</a>
         @else
-            <span>Voir</span>
+            <span></span>
         @endif
     </div>
 

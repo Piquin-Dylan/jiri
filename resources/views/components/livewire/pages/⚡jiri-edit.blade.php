@@ -10,6 +10,9 @@ new #[Title('Jiri-edit')] class extends Component {
 
     public Jiri $jiri;
 
+    public $query = "";
+
+
     public $contact;
 
 
@@ -27,7 +30,8 @@ new #[Title('Jiri-edit')] class extends Component {
     #[\Livewire\Attributes\Computed]
     public function contacts()
     {
-        return $this->jiri->contacts()->get();
+        return $this->jiri->contacts()->when($this->query, fn($q) => $q->where('contacts.name', 'like', "%{$this->query}%"))->get();
+
     }
 
     #[\Livewire\Attributes\Computed]
@@ -79,8 +83,8 @@ new #[Title('Jiri-edit')] class extends Component {
         @endforeach
     </div>
 
-
     @if($this->contacts->isEmpty())
+
         <x-modal name="contact">
             <x-slot:empty_content>
                 <x-empty-state title="Listes des contacts du jiri"
@@ -97,10 +101,11 @@ new #[Title('Jiri-edit')] class extends Component {
             </x-slot:empty_content>
             <livewire:livewire.form.add_contact :jiri="$jiri"></livewire:livewire.form.add_contact>
         </x-modal>
-        <x-search-bar placeHolder="Rechercher un contact"></x-search-bar>
 
     @endif
-    @foreach($this->contacts as $c)
+    <x-search-bar wire:model.live="query" placeHolder="Rechercher un contact"></x-search-bar>
+
+@foreach($this->contacts as $c)
         <x-contact-card href="{{route('jiri-student',[
         'jiri'=>$this->jiri->id,
         'student' => $c->id])}}"

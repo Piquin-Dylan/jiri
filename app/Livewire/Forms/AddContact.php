@@ -20,8 +20,7 @@ class AddContact extends Form
 
         $sync = collect($this->status)
             ->filter()
-            ->map(fn ($role) => ['role' => $role])
-            ->all();
+            ->map(fn($role) => ['role' => $role]);
 
         $this->jiri->contacts()->syncWithoutDetaching($sync);
 

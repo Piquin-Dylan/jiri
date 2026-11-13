@@ -18,4 +18,14 @@ return [
     'mot_de_passe_oublie' => 'Mot de passe oublié ?',
     'creer_un_compte' => 'Créer un compte',
     'subtitle_register' => 'Créez un compte pour accéder à votre espace et gérer vos jiris et vos contacts',
+
+    'label_name' => 'Nom',
+    'label_email' => 'Email',
+    'label_password' => 'Mot de passe',
+    'label_password_confirmation' => 'Confirmer votre mot de passe',
+
+
+    'placeholder_name' => 'John Dupont',
+    'placeholder_email' => 'John@gmail.com',
+    'placeholder_password' => 'Saisissez votre mot de passe',
 ];

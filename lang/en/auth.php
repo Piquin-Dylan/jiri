@@ -18,4 +18,12 @@ return [
     'creer_un_compte' => 'Create an account',
     'subtitle_register' => 'Create an account to access your workspace and manage your Jiris and your contacts',
 
+    'label_name' => 'Name',
+    'label_email' => 'Email',
+    'label_password' => 'Password',
+    'label_password_confirmation' => 'Confirm your password',
+
+    'placeholder_name' => 'John Dupont',
+    'placeholder_email' => 'John@gmail.com',
+    'placeholder_password' => 'Enter your password',
 ];
