@@ -13,7 +13,7 @@ new #[Title('Jiri-edit')] class extends Component {
     public $search_contact = "";
     public $search_project = "";
 
-    public string $filter = 'evaluated';
+    public string $filter = 'evaluators';
 
 
     public $contact;
@@ -111,8 +111,8 @@ new #[Title('Jiri-edit')] class extends Component {
     <x-search-bar wire:model.live="search_contact" placeHolder="Rechercher un contact"></x-search-bar>
 
 
-    <span class="cursor-pointer" wire:click="$set('filter','evaluators',true)">Evaluators</span>
-    <span class="cursor-pointer" wire:click="$set('filter','evaluated',true)">Students</span>
+  <x-change_color_button></x-change_color_button>
+
 
     @foreach($this->contacts as $c)
         <x-contact-card href="{{route('jiri-student',[

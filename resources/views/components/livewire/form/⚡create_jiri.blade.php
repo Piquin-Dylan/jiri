@@ -11,7 +11,7 @@ new class extends Component {
     {
         $this->form->store();
 
-        $this->dispatch('close-jiri');
+        $this->dispatch('close-jiris');
         $this->dispatch('data-created');
 
     }
