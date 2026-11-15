@@ -2,7 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'auth.login')->name('login');
+Route::view('/', 'onboarding.accueil')->name('accueil');
+Route::view('/évaluation', 'onboarding.onboarding-2')->name('onboarding-2');
+Route::view('/délibération', 'onboarding.onboarding-3')->name('onboarding-3');
+Route::view('/login', 'auth.login')->name('login');
 Route::view('/register', 'auth.register')->name('register');
 
 Route::middleware('auth')->group(function () {
