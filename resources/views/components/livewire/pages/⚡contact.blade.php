@@ -17,8 +17,8 @@ new class extends Component {
     public function contacts()
     {
 
-        return Contact::where('user_id', Auth::id())
-            ->when($this->query, fn($q) => $q->where('contacts.name', 'like', "%{$this->query}%"))
+        //améliorer la requete avec auth()->user()->contacts
+        return auth()->user()->contacts()->when($this->query, fn($q) => $q->where('contacts.name', 'like', "%{$this->query}%"))
             ->get();
     }
 
