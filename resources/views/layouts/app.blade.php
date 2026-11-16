@@ -13,14 +13,16 @@
 ])
 </head>
 <body>
-@unless (request()->routeIs('login', 'register','password.request','password.reset'))
+@unless (request()->routeIs('login', 'register','password.request','password.reset','accueil','onboarding-2','onboarding-3'))
     <x-navigation.sidebar/>
 @endunless
 
 <main @class([
     'min-h-screen',
-    'px-4 pt-16 md:pt-4 md:pl-68 md:pr-4' => ! request()->routeIs('login', 'register', 'password.request', 'password.reset'),])>
+    'px-4 pt-16 md:pt-4 md:pl-68 md:pr-4' => ! request()->routeIs('login', 'register', 'password.request', 'password.reset','accueil','onboarding-2','onboarding-3'),])>
     {{ $slot }}
 </main>
+
+@livewireScripts
 </body>
 </html>

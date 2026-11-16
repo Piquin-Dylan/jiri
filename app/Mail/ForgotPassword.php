@@ -5,6 +5,7 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
@@ -17,7 +18,7 @@ class ForgotPassword extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct(public \App\Models\ForgotPassword $forgotPassword)
     {
         //
     }
@@ -28,7 +29,8 @@ class ForgotPassword extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Forgot Password',
+            from: new Address(config('mail.from.address'), config('mail.from.name')),
+            subject: 'Forgot-Password',
         );
     }
 
@@ -38,7 +40,7 @@ class ForgotPassword extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'mail.forgot-password',
         );
     }
 
