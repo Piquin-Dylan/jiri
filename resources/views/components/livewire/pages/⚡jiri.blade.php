@@ -15,13 +15,6 @@ new class extends Component {
     public function mount()
     {
 
-        // $this->current_jiri = Jiri::whereDate('jiris.date_jiri', \Carbon\Carbon::today())->get();
-
-
-        // $this->coming_jiri = Jiri::whereDate('jiris.date_jiri', '>', Carbon::today())->get();
-
-
-        //   $this->archived = Jiri::whereDate('jiris.date_jiri', '<', Carbon::today())->get();
     }
 
     public function currentJiri()
@@ -38,13 +31,17 @@ new class extends Component {
     #[\Livewire\Attributes\Computed]
     public function jiris()
     {
-        return Jiri::where('user_id', Auth::id())->when($this->filter === 'current', function ($q) {
-            $q->whereDate('date_jiri', Carbon::now());
-        })->when($this->filter === 'coming', function ($q) {
-            $q->whereDate('date_jiri', '>', Carbon::now());
-        })->when($this->filter === 'archived', function ($q) {
-            $q->whereDate('date_jiri', '<', Carbon::now());
-        })->when($this->query, fn($q) => $q->where('name_project', 'like', "%{$this->query}%"))
+         
+        return Jiri::where('user_id', Auth::id())
+            ->when($this->filter === 'current', function ($q) {
+                $q->whereDate('date_jiri', Carbon::now());
+            })->when($this->filter === 'coming', function ($q) {
+                $q->whereDate('date_jiri', '>', Carbon::now());
+            })->when($this->filter === 'archived', function ($q) {
+                $q->whereDate('date_jiri', '<', Carbon::now());
+            })->when($this->filter === '', function () {
+                Jiri::where('user_id', Auth::id());
+            })->when($this->query, fn($q) => $q->where('name_project', 'like', "%{$this->query}%"))
             ->get();
     }
 
@@ -75,11 +72,15 @@ new class extends Component {
         </x-modal>
     @endif
 
-    <span wire:click="$set('filter','current')">current jiri</span>
-    <span wire:click="$set('filter','coming')">coming jiri</span>
-    <span wire:click="$set('filter','archived')">archived jiri</span>
+    <div class="flex justify-between mt-6">
+        <span class="cursor-pointer" wire:click="$set('filter','')">Tous les  jiris</span>
+        <span class="cursor-pointer" wire:click="$set('filter','current')">current jiri</span>
+        <span class="cursor-pointer" wire:click="$set('filter','coming')">coming jiri</span>
+        <span class="cursor-pointer" wire:click="$set('filter','archived')">archived jiri</span>
 
-    <div class="flex justify-between pt-6 pr-4">
+    </div>
+
+    <div class="flex justify-items-start gap-8 flex-wrap pt-6 pr-4">
         @foreach($this->jiris as $jiri)
             <x-jiri-card title="{{$jiri->name_project}}"
                          content="{{$jiri->description}} "
