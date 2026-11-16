@@ -5,7 +5,7 @@
     'openEvent'=>''
 ])
 
-<div class="flex flex-col gap-4  mt-6 mb-6">
+<div class="flex justify-between gap-4  mt-6 mb-6">
     <h2 class="title text-center">{{$title}}</h2>
     <span class="text-xl font-bold flex items-center text-center justify-center">{{$information}}</span>
     <x-button class=""

@@ -29,8 +29,6 @@ new class extends Component {
         $this->form->status = $this->jiri->contacts()
             ->pluck('role', 'contact_id')
             ->toArray();
-
-
     }
 
     #[\Livewire\Attributes\Computed]

@@ -110,6 +110,7 @@ new #[Title('Jiri-edit')] class extends Component {
     <x-search-bar wire:model.live="search_contact" placeHolder="Rechercher un contact"></x-search-bar>
 
 
+    @if($this->contacts->isNotEmpty())
     <div x-data="{ highlightedButton: 'evaluators' }" class="flex justify-center pt-6 mb-6 gap-4">
     <span @click="highlightedButton = 'evaluators'"
           :class="highlightedButton === 'evaluators' ? 'bg-[#385A87] text-white' : 'bg-white text-[#385A87]'"
@@ -121,7 +122,7 @@ new #[Title('Jiri-edit')] class extends Component {
               class="cursor-pointer p-4 rounded-2xl text-xl font-bold"
               wire:click="$set('filter', 'evaluated')">Students</span>
     </div>
-
+    @endif
 
     @foreach($this->contacts as $c)
         <x-contact-card href="{{route('jiri-student',[

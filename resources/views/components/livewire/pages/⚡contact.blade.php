@@ -6,6 +6,7 @@ use Livewire\Component;
 
 new class extends Component {
 
+
     public $query = "";
 
     #[On('data-created')]
@@ -17,9 +18,10 @@ new class extends Component {
     public function contacts()
     {
 
-        //améliorer la requete avec auth()->user()->contacts
-        return auth()->user()->contacts()->when($this->query, fn($q) => $q->where('contacts.name', 'like', "%{$this->query}%"))
-            ->get();
+        return Contact::where('user_id', Auth::id())
+            ->when($this->query, fn($q) => $q->where('contacts.name', 'like', "%{$this->query}%"))->paginate(10);
+
+
     }
 
     public function deleteContact($contactId): void
@@ -56,5 +58,8 @@ new class extends Component {
         <x-contact-card delete="deleteContact('{{$contact->id}}')" name="{{$contact->name}}"
                         email="{{$contact->email}}"></x-contact-card>
     @endforeach
+
+
+    {{ $this->contacts->links() }}
 
 </div>
