@@ -1,7 +1,7 @@
 <?php
 
+use App\Enums\JiriFilter;
 use App\Models\Jiri;
-use Illuminate\Support\Carbon;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
@@ -9,12 +9,11 @@ new class extends Component {
 
     public $query = "";
 
-    public string $filter = '';
+    public JiriFilter $filter = JiriFilter::all;
 
 
     public function mount()
     {
-
     }
 
     public function currentJiri()
@@ -31,16 +30,13 @@ new class extends Component {
     #[\Livewire\Attributes\Computed]
     public function jiris()
     {
-         
         return Jiri::where('user_id', Auth::id())
-            ->when($this->filter === 'current', function ($q) {
-                $q->whereDate('date_jiri', Carbon::now());
-            })->when($this->filter === 'coming', function ($q) {
-                $q->whereDate('date_jiri', '>', Carbon::now());
-            })->when($this->filter === 'archived', function ($q) {
-                $q->whereDate('date_jiri', '<', Carbon::now());
-            })->when($this->filter === '', function () {
-                Jiri::where('user_id', Auth::id());
+            ->when($this->filter === JiriFilter::current, function ($q) {
+                $q->currentJiri();
+            })->when($this->filter === JiriFilter::coming, function ($q) {
+                $q->comingJiri();
+            })->when($this->filter === JiriFilter::archived, function ($q) {
+                $q->archivedJiri();
             })->when($this->query, fn($q) => $q->where('name_project', 'like', "%{$this->query}%"))
             ->get();
     }
@@ -73,7 +69,7 @@ new class extends Component {
     @endif
 
     <div class="flex justify-between mt-6">
-        <span class="cursor-pointer" wire:click="$set('filter','')">Tous les  jiris</span>
+        <span class="cursor-pointer" wire:click="$set('filter','all')">Tous les  jiris</span>
         <span class="cursor-pointer" wire:click="$set('filter','current')">current jiri</span>
         <span class="cursor-pointer" wire:click="$set('filter','coming')">coming jiri</span>
         <span class="cursor-pointer" wire:click="$set('filter','archived')">archived jiri</span>

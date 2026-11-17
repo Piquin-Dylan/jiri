@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Scope;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Carbon;
 
 class Jiri extends Model
 {
@@ -32,7 +35,6 @@ class Jiri extends Model
         return $this->belongsToMany(Contact::class)->withPivot('role');
     }
 
-
     public function evaluators(): BelongsToMany
     {
         return $this->contacts()->wherePivot('role', 'Evaluator');
@@ -52,5 +54,23 @@ class Jiri extends Model
     public function users(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    #[Scope]
+    protected function currentJiri(Builder $query): void
+    {
+        $query->whereDate('date_jiri', Carbon::now());
+    }
+    
+    #[Scope]
+    protected function comingJiri(Builder $query): void
+    {
+        $query->whereDate('date_jiri', '>', Carbon::now());
+    }
+
+    #[Scope]
+    protected function archivedJiri(Builder $query): void
+    {
+        $query->whereDate('date_jiri', '<', Carbon::now());
     }
 }
