@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\EvaluatorEmail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Address;
@@ -17,7 +18,7 @@ class ForgotPassword extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct(public \App\Models\ForgotPassword $forgotPassword)
+    public function __construct(public EvaluatorEmail $forgotPassword)
     {
         //
     }

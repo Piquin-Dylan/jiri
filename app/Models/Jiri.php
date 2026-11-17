@@ -32,7 +32,7 @@ class Jiri extends Model
 
     public function contacts(): BelongsToMany
     {
-        return $this->belongsToMany(Contact::class)->withPivot('role');
+        return $this->belongsToMany(Contact::class)->withPivot('role', 'token');
     }
 
     public function evaluators(): BelongsToMany
@@ -61,7 +61,7 @@ class Jiri extends Model
     {
         $query->whereDate('date_jiri', Carbon::now());
     }
-    
+
     #[Scope]
     protected function comingJiri(Builder $query): void
     {

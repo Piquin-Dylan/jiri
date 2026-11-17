@@ -8,11 +8,11 @@
     <title>Document</title>
 </head>
 <body>
-<h1>{{$forgt_password->title}}</h1>
 <div>
-    @foreach(unserialize($forgt_password->content) as $p)
-        <p>{{$p}}</p>
-    @endforeach
+    <h1>Salut les amis</h1>
+    <a href="{{ route('jiri-evaluator', ['token' => $contact->pivot->token]) }}">
+        Accéder au jiri
+    </a>
 </div>
 </body>
 </html>

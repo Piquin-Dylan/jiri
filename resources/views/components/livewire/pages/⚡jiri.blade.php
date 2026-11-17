@@ -69,11 +69,12 @@ new class extends Component {
     @endif
 
     <div class="flex justify-between mt-6">
-        <span class="cursor-pointer" wire:click="$set('filter','all')">Tous les  jiris</span>
-        <span class="cursor-pointer" wire:click="$set('filter','current')">current jiri</span>
-        <span class="cursor-pointer" wire:click="$set('filter','coming')">coming jiri</span>
-        <span class="cursor-pointer" wire:click="$set('filter','archived')">archived jiri</span>
-
+        <x-change_color_button :options="[
+    'all' => 'Tous les jiris',
+    'current' => 'Aujourd\'hui',
+    'coming' => 'À venir',
+    'archived' => 'Archivés',
+]"/>
     </div>
 
     <div class="flex justify-items-start gap-8 flex-wrap pt-6 pr-4">

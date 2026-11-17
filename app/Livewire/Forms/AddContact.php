@@ -3,6 +3,7 @@
 namespace App\Livewire\Forms;
 
 use App\Models\Jiri;
+use Illuminate\Support\Str;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 
@@ -19,7 +20,7 @@ class AddContact extends Form
 
         $sync = collect($this->status)
             ->filter()
-            ->map(fn ($role) => ['role' => $role]);
+            ->map(fn ($role) => ['role' => $role, 'token' => Str::random(64)]);
 
         $this->jiri->contacts()->syncWithoutDetaching($sync);
 

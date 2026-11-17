@@ -14,6 +14,7 @@ return new class extends Migration
             $table->foreignUuid('contact_id')->constrained('contacts')->cascadeOnDelete();
             $table->primary(['jiri_id', 'contact_id']);
             $table->enum('role', ContactRole::cases());
+            $table->string('token')->nullable()->unique();
         });
     }
 

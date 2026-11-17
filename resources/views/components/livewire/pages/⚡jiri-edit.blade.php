@@ -17,6 +17,7 @@ new #[Title('Jiri-edit')] class extends Component {
 
 
     public $contact;
+    public $evaluator;
 
 
     #[On('data-added')]
@@ -24,10 +25,22 @@ new #[Title('Jiri-edit')] class extends Component {
     {
     }
 
-    public function mount($jiri)
+    public function mount($jiri = null, $token = null)
     {
-        $this->jiri = $jiri;
+        if ($token) {
+            $this->jiri = Jiri::whereHas('evaluators', function ($query) use ($token) {
+                $query->where('contact_jiri.token', $token);
+            })->firstOrFail();
 
+            return;
+        }
+
+        if ($jiri instanceof Jiri) {
+            $this->jiri = $jiri;
+        } else {
+            $this->jiri = Jiri::findOrFail($jiri);
+
+        }
     }
 
 
@@ -50,6 +63,23 @@ new #[Title('Jiri-edit')] class extends Component {
     {
         $this->jiri->contacts()->detach($contactId);
     }
+
+    #[\Livewire\Attributes\Computed]
+    public function evaluators()
+    {
+        return $this->jiri->evaluators;
+    }
+
+    public function sentMail()
+    {
+
+        $jiri = $this->jiri;
+
+        foreach ($this->evaluators as $evaluator) {
+            \Illuminate\Support\Facades\Mail::to($evaluator->email)
+                ->send(new \App\Mail\EvaluatorsEmail($evaluator, $jiri));
+        }
+    }
 };
 ?>
 
@@ -57,6 +87,20 @@ new #[Title('Jiri-edit')] class extends Component {
 
     <div class="flex justify-between mr-4 mb-8">
         <h2 class="title">{{$jiri->name_project}}</h2>
+        <x-modal name="start">
+            <x-slot:empty_content>
+                <x-empty-state
+                    action="Démarrer le jiri" open-event="open-start"></x-empty-state>
+            </x-slot:empty_content>
+            @foreach($this->evaluators as $e)
+                <x-contact-card
+                    name="{{$e->name}}"
+                    email="{{$e->email}}">
+                </x-contact-card>
+            @endforeach
+
+            <x-button wire:click="sentMail()" name="Envoyer le mail"></x-button>
+        </x-modal>
         <span class="title">{{$jiri->date_jiri}} - {{$jiri->hours_start}} - {{$jiri->hours_end}}</span>
     </div>
 
@@ -111,17 +155,7 @@ new #[Title('Jiri-edit')] class extends Component {
 
 
     @if($this->contacts->isNotEmpty())
-    <div x-data="{ highlightedButton: 'evaluators' }" class="flex justify-center pt-6 mb-6 gap-4">
-    <span @click="highlightedButton = 'evaluators'"
-          :class="highlightedButton === 'evaluators' ? 'bg-[#385A87] text-white' : 'bg-white text-[#385A87]'"
-          class="cursor-pointer p-4 rounded-2xl text-xl font-bold"
-          wire:click="$set('filter', 'evaluators')">Evaluators</span>
-
-        <span @click="highlightedButton = 'evaluated'"
-              :class="highlightedButton === 'evaluated' ? 'bg-[#385A87] text-white' : 'bg-white text-[#385A87]'"
-              class="cursor-pointer p-4 rounded-2xl text-xl font-bold"
-              wire:click="$set('filter', 'evaluated')">Students</span>
-    </div>
+        <x-change_color_button :options="['evaluators' => 'Evaluators', 'evaluated' => 'Students']"/>
     @endif
 
     @foreach($this->contacts as $c)
